@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://c05ejfqarlf7r"]
+
+[ext_resource type="Texture2D" uid="uid://ckuno1s1ejc7j" path="res://art/snek tail.png" id="1_wne8n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o8wpl"]
+size = Vector2(5.8, 14)
+
+[node name="Tail" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("1_wne8n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(15, 0)
+scale = Vector2(3, 3)
+shape = SubResource("RectangleShape2D_o8wpl")

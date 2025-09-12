@@ -1,0 +1,107 @@
+[gd_scene load_steps=5 format=3 uid="uid://3bretq8smwia"]
+
+[ext_resource type="Script" uid="uid://d1p1w2m1bjy6" path="res://scripts/hud.gd" id="1_ahhtf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ahhtf"]
+bg_color = Color(0.282509, 0.536186, 0.33738, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.104784, 0.241709, 0.102196, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+expand_margin_left = 10.0
+expand_margin_top = 5.0
+expand_margin_right = 10.0
+expand_margin_bottom = 5.0
+shadow_size = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oo0fn"]
+bg_color = Color(0.149046, 0.307662, 0.183769, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.0893823, 0.213058, 0.0870427, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+expand_margin_left = 10.0
+expand_margin_top = 5.0
+expand_margin_right = 10.0
+expand_margin_bottom = 5.0
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ysmq"]
+bg_color = Color(0.256437, 0.492839, 0.307751, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.104784, 0.241709, 0.102196, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+expand_margin_left = 10.0
+expand_margin_top = 5.0
+expand_margin_right = 10.0
+expand_margin_bottom = 5.0
+shadow_size = 8
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_ahhtf")
+
+[node name="MessageLabel" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -202.0
+offset_right = 282.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 61
+text = "Hello"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_left = 17.0
+offset_top = 3.0
+offset_right = 155.0
+offset_bottom = 121.0
+theme_override_font_sizes/font_size = 56
+text = "0"
+
+[node name="StartButton" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.502
+anchor_top = 0.695
+anchor_right = 0.502
+anchor_bottom = 0.695
+offset_left = -81.304
+offset_top = -49.36
+offset_right = 81.696
+offset_bottom = 49.64
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 51
+theme_override_styles/hover = SubResource("StyleBoxFlat_ahhtf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_oo0fn")
+theme_override_styles/normal = SubResource("StyleBoxFlat_5ysmq")
+text = "Start"
+
+[node name="MessageTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]
