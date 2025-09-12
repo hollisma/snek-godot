@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f5bqu"]
 size = Vector2(16, 14)
 
-[node name="Body" type="Area2D" groups=["snek_body"]]
+[node name="Body" type="Area2D" groups=["player", "snek_body"]]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(3, 3)

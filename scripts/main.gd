@@ -7,6 +7,10 @@ var score
 @onready var snek_head = $snek/Head
 @onready var hud = $HUD
 @onready var food_manager = $FoodManager
+@onready var powerup_manager = $PowerupManager
+
+func _ready(): 
+	powerup_manager.snek = snek
 
 func new_game():
 	score = 0
@@ -18,6 +22,7 @@ func new_game():
 
 func _on_appl_eaten(): 
 	food_manager.spawn_appl(snek, snek_head)
+	powerup_manager.spawn_powerup()
 	score += 1
 	hud.update_score(score)
 

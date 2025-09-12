@@ -102,3 +102,7 @@ func grow():
 
 func stop(): 
 	moving = false
+
+func change_speed(speed_change): 
+	speed += speed_change
+	segment_distance = 2500.0 / speed
