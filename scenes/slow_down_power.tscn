@@ -2,11 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://b85t84uvic217" path="res://scenes/powerup.tscn" id="1_djsvb"]
 [ext_resource type="Script" uid="uid://dtwkbgicshiq6" path="res://scripts/slow_down_power.gd" id="2_08vru"]
-[ext_resource type="Texture2D" uid="uid://ckuno1s1ejc7j" path="res://art/snek tail.png" id="2_icobe"]
+[ext_resource type="Texture2D" uid="uid://chj7jqdvect75" path="res://art/slow down power.png" id="3_08vru"]
 
 [node name="SlowDownPower" instance=ExtResource("1_djsvb")]
 script = ExtResource("2_08vru")
 speed_decrease = -30.0
 
 [node name="Sprite2D" parent="." index="0"]
-texture = ExtResource("2_icobe")
+texture = ExtResource("3_08vru")
