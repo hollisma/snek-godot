@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://br5ehq457aahs"]
+
+[ext_resource type="PackedScene" uid="uid://b85t84uvic217" path="res://scenes/powerup.tscn" id="1_wllx1"]
+[ext_resource type="Script" uid="uid://dnb1csuuf3bar" path="res://scripts/music_power.gd" id="2_0etgc"]
+[ext_resource type="Texture2D" uid="uid://b01gybal2dsb8" path="res://art/snek body.png" id="3_c2hyk"]
+
+[node name="MusicPower" instance=ExtResource("1_wllx1")]
+script = ExtResource("2_0etgc")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("3_c2hyk")

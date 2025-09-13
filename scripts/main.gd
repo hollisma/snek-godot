@@ -8,9 +8,16 @@ var score
 @onready var hud = $HUD
 @onready var food_manager = $FoodManager
 @onready var powerup_manager = $PowerupManager
+@onready var music_manager = $MusicManager
 
 func _ready(): 
 	powerup_manager.snek = snek
+	powerup_manager.music_manager = music_manager
+	music_manager.start()
+
+func _process(_delta):
+	if Input.is_action_just_pressed("dev 1"):
+		music_manager.play_random_song()
 
 func new_game():
 	score = 0
