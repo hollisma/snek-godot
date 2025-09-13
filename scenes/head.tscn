@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cob3ywp3v3m6u"]
 
-[ext_resource type="Texture2D" uid="uid://wpplswavsuqm" path="res://art/snek head.png" id="1_nsfte"]
+[ext_resource type="Texture2D" uid="uid://38oct50bkvml" path="res://art/snek head - shaded.png" id="1_nsfte"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d75dd"]
 size = Vector2(10, 14.0833)

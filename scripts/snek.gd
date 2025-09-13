@@ -3,9 +3,13 @@ extends Node2D
 signal appl_eaten
 signal snek_death
 
-@export var speed: float = 200.0 # 150.0
+@export var default_speed: float = 175.0
+@export var min_speed: float = 50.0
 @export var collision_distance = 25.0
-var segment_distance = 2500.0 / speed
+@export var segment_distance_constant = 2400.0
+
+var speed = default_speed
+var segment_distance = segment_distance_constant / speed
 var moving = false
 
 var path_points: Array[Vector2] = []
@@ -24,7 +28,7 @@ func _physics_process(delta):
 	
 	# Move and record head
 	$Head.position += direction * speed * delta
-	path_points.insert(0, $Head.position)
+	path_points.insert(0, $Head.position)	
 	
 	update_segments()
 	trim_path()
@@ -39,6 +43,7 @@ func _on_head_area_entered(area):
 		appl_eaten.emit()
 
 func start(): 
+	speed = default_speed
 	moving = true
 	show()
 
@@ -104,5 +109,5 @@ func stop():
 	moving = false
 
 func change_speed(speed_change): 
-	speed += speed_change
-	segment_distance = 2500.0 / speed
+	speed = max(speed + speed_change, min_speed)
+	segment_distance = segment_distance_constant / speed

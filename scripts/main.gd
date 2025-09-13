@@ -16,6 +16,7 @@ func new_game():
 	score = 0
 	$HUD.update_score(score)
 	get_tree().call_group("appls", "queue_free")
+	get_tree().call_group("powerups", "queue_free")
 	$snek.reset()
 	$snek.start()
 	food_manager.spawn_appl(snek, snek_head)
