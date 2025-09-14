@@ -39,3 +39,4 @@ func _on_appl_eaten():
 func _on_snek_death(): 
 	snek.stop()
 	hud.show_game_over(score)
+	powerup_manager.stop()
