@@ -5,6 +5,7 @@ extends Node2D
 var snek: Node
 var music_manager: Node
 
+# TODO: Spawn powerup away from player
 func spawn_powerup(): 
 	if powerup_scenes.size() == 0: 
 		return
