@@ -23,24 +23,12 @@ func _ready():
 func _physics_process(delta):
 	if not moving: 
 		return
-	
 	handle_input()
-	
-	# Move and record head
-	$Head.position += direction * speed * delta
-	path_points.insert(0, $Head.position)	
-	
+	move(delta)
 	update_segments()
 	trim_path()
-	
 	check_boundary()
 	check_self_collision()
-
-func _on_head_area_entered(area):
-	if area.is_in_group("appls"): 
-		area.queue_free()
-		grow()
-		appl_eaten.emit()
 
 func start(): 
 	speed = default_speed
@@ -55,6 +43,10 @@ func reset():
 	direction = Vector2.RIGHT
 	$Head.rotation = 0
 	$Head.global_position = Vector2(10, screen_size.y / 2)
+
+func move(delta): 
+	$Head.position += direction * speed * delta
+	path_points.insert(0, $Head.position)
 
 func handle_input():
 	if Input.is_action_pressed("move_up") and direction != Vector2.DOWN:
@@ -111,3 +103,9 @@ func stop():
 func change_speed(speed_change): 
 	speed = max(speed + speed_change, min_speed)
 	segment_distance = segment_distance_constant / speed
+
+func _on_head_area_entered(area):
+	if area.is_in_group("appls"): 
+		area.queue_free()
+		grow()
+		appl_eaten.emit()

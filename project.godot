@@ -18,6 +18,7 @@ config/icon="res://art/icon.svg"
 [global_group]
 
 player=""
+snek_head=""
 
 [input]
 

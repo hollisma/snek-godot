@@ -11,7 +11,9 @@ var score
 @onready var music_manager = $MusicManager
 
 func _ready(): 
+	food_manager.snek_head = snek_head
 	powerup_manager.snek = snek
+	powerup_manager.snek_head = snek_head
 	powerup_manager.music_manager = music_manager
 	music_manager.start()
 
@@ -26,11 +28,11 @@ func new_game():
 	get_tree().call_group("powerups", "queue_free")
 	$snek.reset()
 	$snek.start()
-	food_manager.spawn_appl(snek, snek_head)
+	food_manager.spawn_appl()
+	powerup_manager.start_spawning()
 
 func _on_appl_eaten(): 
-	food_manager.spawn_appl(snek, snek_head)
-	powerup_manager.spawn_powerup()
+	food_manager.spawn_appl()
 	score += 1
 	hud.update_score(score)
 
