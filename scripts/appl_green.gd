@@ -1,3 +1,3 @@
 extends Area2D
 
-@export var points: int = 3
+@export var points: int = 2
