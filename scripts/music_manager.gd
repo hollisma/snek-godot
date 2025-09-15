@@ -17,15 +17,15 @@ func start():
 	music_player.stream = current_track
 	music_player.play()
 
-func play_song(song: AudioStream): 
+func play_random_song(): 
+	var new_song = current_track
+	while new_song == current_track: 
+		new_song = songs.pick_random()
+	_play_song(new_song)
+
+func _play_song(song: AudioStream): 
 	if song != current_track: 
 		song.loop = true
 		current_track = song
 		music_player.stream = current_track
 		music_player.play()
-
-func play_random_song(): 
-	var new_song = current_track
-	while new_song == current_track: 
-		new_song = songs.pick_random()
-	play_song(new_song)
