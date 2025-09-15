@@ -1,9 +1,16 @@
 extends Powerup
 
-@export var size_decrease_min: int = 1
-@export var size_decrease_max: int = 3
-const FREQUENCY: int = 2
+const FREQUENCY: int = 2 # 2
 
 func apply_effect_to_snek(snek): 
-	var size_decrease_value = randi_range(size_decrease_min, size_decrease_max)
+	var size_decrease_value = _get_size_decrease_value()
 	snek.trim_body(size_decrease_value)
+
+func _get_size_decrease_value() -> int:
+	var rand = randi() % 100
+	if rand < 60: 
+		return 1
+	if rand < 85: 
+		return 2
+	else: 
+		return 3

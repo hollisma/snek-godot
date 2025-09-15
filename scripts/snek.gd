@@ -113,6 +113,5 @@ func trim_body(segment_num_input):
 
 func _on_head_area_entered(area):
 	if area.is_in_group("appls"): 
-		area.queue_free()
 		grow()
-		appl_eaten.emit()
+		emit_signal("appl_eaten", area)

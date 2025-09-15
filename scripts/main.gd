@@ -35,10 +35,11 @@ func new_game():
 	food_manager.spawn_appl()
 	powerup_manager.start_spawning()
 
-func _on_appl_eaten(): 
+func _on_appl_eaten(appl): 
 	food_manager.spawn_appl()
-	score += 1
+	score += appl.points
 	hud.update_score(score)
+	appl.queue_free()
 
 func _on_snek_death(): 
 	snek.stop()

@@ -8,8 +8,6 @@
 
 [node name="ScissorsPower" instance=ExtResource("1_67nxh")]
 script = ExtResource("2_4ur4j")
-size_decrease_min = 1
-size_decrease_max = 3
 
 [node name="Sprite2D" parent="." index="0"]
 script = ExtResource("2_a8clc")
