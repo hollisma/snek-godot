@@ -22,6 +22,8 @@ func _ready():
 func _process(_delta):
 	if Input.is_action_just_pressed("dev 1"):
 		music_manager.play_random_song()
+	if Input.is_action_just_pressed("dev 2"):
+		powerup_manager.__test(1)
 
 func new_game():
 	score = 0

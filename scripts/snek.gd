@@ -104,6 +104,13 @@ func change_speed(speed_change):
 	speed = max(speed + speed_change, min_speed)
 	segment_distance = segment_distance_constant / speed
 
+func trim_body(segment_num_input): 
+	var segment_num = min(segment_num_input, segments.size())
+	for i in range(segment_num): 
+		var last_segment = segments.pop_back()
+		if last_segment: 
+			last_segment.queue_free()
+
 func _on_head_area_entered(area):
 	if area.is_in_group("appls"): 
 		area.queue_free()

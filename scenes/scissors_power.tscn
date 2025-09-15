@@ -1,0 +1,17 @@
+[gd_scene load_steps=6 format=3 uid="uid://8aesp52ka4qr"]
+
+[ext_resource type="PackedScene" uid="uid://b85t84uvic217" path="res://scenes/powerup.tscn" id="1_67nxh"]
+[ext_resource type="Script" uid="uid://cr8ce0whk0ap" path="res://scripts/scissors_power.gd" id="2_4ur4j"]
+[ext_resource type="Script" uid="uid://d3x5y4gk1ixqq" path="res://scripts/themed_sprite.gd" id="2_a8clc"]
+[ext_resource type="Texture2D" uid="uid://b08fs4j2dcvcr" path="res://art/scissors.png" id="3_4ur4j"]
+[ext_resource type="Texture2D" uid="uid://cckcli0rjs2he" path="res://art/scissors - shaded.png" id="5_4ur4j"]
+
+[node name="ScissorsPower" instance=ExtResource("1_67nxh")]
+script = ExtResource("2_4ur4j")
+size_decrease_min = 1
+size_decrease_max = 3
+
+[node name="Sprite2D" parent="." index="0"]
+script = ExtResource("2_a8clc")
+basic_texture = ExtResource("3_4ur4j")
+shaded_texture = ExtResource("5_4ur4j")

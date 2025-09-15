@@ -77,3 +77,9 @@ func _on_powerup_collected(powerup):
 	if powerup.has_method("apply_effect_to_music") and music_manager != null: 
 		powerup.apply_effect_to_music(music_manager)
 	powerup.queue_free()
+
+func __test(num): 
+	if num == 1: 
+		print('changing spawn times to ', 'fast' if spawn_time_min > 1 else 'slow')
+		spawn_time_min = 1 if spawn_time_min > 1 else 3
+		spawn_time_max = 1 if spawn_time_max > 1 else 7
