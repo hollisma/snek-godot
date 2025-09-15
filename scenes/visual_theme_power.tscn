@@ -1,0 +1,15 @@
+[gd_scene load_steps=6 format=3 uid="uid://bry6emtqt1k87"]
+
+[ext_resource type="PackedScene" uid="uid://b85t84uvic217" path="res://scenes/powerup.tscn" id="1_4tps8"]
+[ext_resource type="Script" uid="uid://1nyqsao81rnu" path="res://scripts/visual_theme_power.gd" id="2_4o42j"]
+[ext_resource type="Script" uid="uid://d3x5y4gk1ixqq" path="res://scripts/themed_sprite.gd" id="3_h7e8y"]
+[ext_resource type="Texture2D" uid="uid://ckriuuii2l8sk" path="res://art/visual theme power.png" id="4_3m3mw"]
+[ext_resource type="Texture2D" uid="uid://dwf8771ydj663" path="res://art/visual theme power - shaded.png" id="5_r4vk4"]
+
+[node name="VisualThemePower" instance=ExtResource("1_4tps8")]
+script = ExtResource("2_4o42j")
+
+[node name="Sprite2D" parent="." index="0"]
+script = ExtResource("3_h7e8y")
+basic_texture = ExtResource("5_r4vk4")
+shaded_texture = ExtResource("4_3m3mw")
