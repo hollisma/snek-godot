@@ -2,13 +2,14 @@ extends Node2D
 
 @export var powerup_scenes: Array[PackedScene]
 
-var spawn_time_min = 1 # 3
-var spawn_time_max = 1 # 7
+var spawn_time_min = 3 # 3
+var spawn_time_max = 7 # 7
 
 @onready var powerup_timer = $PowerupTimer
 var snek: Node
 var snek_head: Node
 var music_manager: Node
+var theme_manager: Node
 
 var powerup_freq_table: Array = []
 var total_freq: int = 0
@@ -54,7 +55,7 @@ func _pick_powerup() -> PackedScene:
 	return powerup_scenes[0] # fallback
 
 func _get_spawn_location(): 
-	var margin = 16
+	var margin = 32
 	var max_attempts = 100 # to avoid infinite loop
 	var pos = Vector2.ZERO
 	
@@ -69,6 +70,8 @@ func _get_spawn_location():
 
 func _on_powerup_collected(powerup): 
 	print("powerup collected: %s" % powerup)
+	if powerup.has_method("apply_effect"): 
+		powerup.apply_effect()
 	if powerup.has_method("apply_effect_to_snek") and snek != null: 
 		powerup.apply_effect_to_snek(snek)
 	if powerup.has_method("apply_effect_to_music") and music_manager != null: 

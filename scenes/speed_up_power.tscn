@@ -1,15 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://fbvdjq64klcd"]
+[gd_scene load_steps=6 format=3 uid="uid://fbvdjq64klcd"]
 
 [ext_resource type="PackedScene" uid="uid://b85t84uvic217" path="res://scenes/powerup.tscn" id="1_48ob4"]
 [ext_resource type="Script" uid="uid://cnbvl5qdmy4j1" path="res://scripts/speed_up_power.gd" id="2_c3pg4"]
 [ext_resource type="Texture2D" uid="uid://45my3m33jq01" path="res://art/speed up power - shaded.png" id="3_c3pg4"]
+[ext_resource type="Script" uid="uid://d3x5y4gk1ixqq" path="res://scripts/themed_sprite.gd" id="3_trs12"]
+[ext_resource type="Texture2D" uid="uid://b3dgx8yvhu8jo" path="res://art/speed up power.png" id="4_ba4gw"]
 
 [node name="SpeedUpPower" instance=ExtResource("1_48ob4")]
 script = ExtResource("2_c3pg4")
 speed_increase = 30.0
 
 [node name="Sprite2D" parent="." index="0"]
-texture = ExtResource("3_c3pg4")
+script = ExtResource("3_trs12")
+basic_texture = ExtResource("4_ba4gw")
+shaded_texture = ExtResource("3_c3pg4")
 
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2(0, 7.15256e-07)

@@ -1,11 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://br5ehq457aahs"]
+[gd_scene load_steps=6 format=3 uid="uid://br5ehq457aahs"]
 
 [ext_resource type="PackedScene" uid="uid://b85t84uvic217" path="res://scenes/powerup.tscn" id="1_wllx1"]
 [ext_resource type="Script" uid="uid://dnb1csuuf3bar" path="res://scripts/music_power.gd" id="2_0etgc"]
+[ext_resource type="Script" uid="uid://d3x5y4gk1ixqq" path="res://scripts/themed_sprite.gd" id="3_c2hyk"]
 [ext_resource type="Texture2D" uid="uid://blxm3wckhy37e" path="res://art/music power - shaded.png" id="3_wllx1"]
+[ext_resource type="Texture2D" uid="uid://d2g5dhjd5nqm1" path="res://art/music power.png" id="4_jgu1d"]
 
 [node name="MusicPower" instance=ExtResource("1_wllx1")]
 script = ExtResource("2_0etgc")
 
 [node name="Sprite2D" parent="." index="0"]
-texture = ExtResource("3_wllx1")
+script = ExtResource("3_c2hyk")
+basic_texture = ExtResource("4_jgu1d")
+shaded_texture = ExtResource("3_wllx1")

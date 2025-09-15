@@ -3,9 +3,14 @@ extends Node
 @export var songs: Array[AudioStream]
 @export var default_song: AudioStream = preload("res://music/Running.ogg")
 
-@onready var music_player: AudioStreamPlayer = $MusicPlayer
+@onready var music_player: AudioStreamPlayer
 
 var current_track: AudioStream = default_song
+
+func _ready(): 
+	music_player = AudioStreamPlayer.new()
+	add_child(music_player)
+	music_player.autoplay = false
 
 func start(): 
 	current_track.loop = true
