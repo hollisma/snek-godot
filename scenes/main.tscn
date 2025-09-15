@@ -27,6 +27,9 @@ position = Vector2(10, 324)
 [node name="FoodManager" type="Node2D" parent="."]
 script = ExtResource("4_jyhfs")
 
+[node name="GoldenApplTimer" type="Timer" parent="FoodManager"]
+one_shot = true
+
 [node name="PowerupManager" type="Node2D" parent="."]
 script = ExtResource("5_tbgi4")
 powerup_scenes = Array[PackedScene]([ExtResource("6_tefeu"), ExtResource("7_o6xl0"), ExtResource("8_eb6dy"), ExtResource("9_trceg"), ExtResource("10_jkv2x")])
@@ -45,4 +48,5 @@ script = ExtResource("14_a8y0u")
 [connection signal="appl_eaten" from="snek" to="." method="_on_appl_eaten"]
 [connection signal="snek_death" from="snek" to="." method="_on_snek_death"]
 [connection signal="start_game" from="HUD" to="." method="new_game"]
+[connection signal="timeout" from="FoodManager/GoldenApplTimer" to="FoodManager" method="_on_GoldenApplTimer_timeout"]
 [connection signal="timeout" from="PowerupManager/PowerupTimer" to="PowerupManager" method="_on_powerup_timer_timeout"]
