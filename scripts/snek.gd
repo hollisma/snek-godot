@@ -15,7 +15,6 @@ var moving = false
 # Store { position, distance }
 var path_points: Array = []
 var start_index: int = 0 # Buffer
-var total_distance_traveled: float = 0.0
 
 var segments: Array[Node2D] = []
 var direction: Vector2 = Vector2.RIGHT   # start moving right
@@ -41,7 +40,6 @@ func start():
 	show()
 
 func reset(): 
-	total_distance_traveled = 0.0
 	path_points.clear()
 	for segment in segments: 
 		segment.queue_free()
@@ -82,14 +80,21 @@ func update_segments():
 	if _get_size() == 0: 
 		return
 	
+	# Update positions
 	var starting_distance = _get_point(_get_size() - 1).distance
 	for i in range(segments.size()):
 		var target_distance = starting_distance - (i + 1) * segment_distance
-		segments[i].position = _get_position_at_distance(target_distance)
+		var pos = _get_position_at_distance(target_distance)
+		segments[i].position = pos
 		
-		# Apply rotation
-		var next_pos = _get_position_at_distance(target_distance + 1.0)
-		segments[i].rotation = (next_pos - segments[i].position).angle()
+		# Apply rotation based on next segment
+		var dir: Vector2
+		if i == 0: 
+			dir = $Head.position - pos
+		else: 
+			dir = segments[i - 1].position - pos
+		if dir.length_squared() > 0.0001: 
+			segments[i].rotation = dir.angle()
 
 func trim_path(): 
 	if _get_size() == 0: 
