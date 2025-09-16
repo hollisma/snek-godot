@@ -24,6 +24,10 @@ func _process(_delta):
 		music_manager.play_random_song()
 	if Input.is_action_just_pressed("dev 2"):
 		powerup_manager.__test(1)
+	if Input.is_action_just_pressed("dev 3"):
+		snek.grow()
+	if Input.is_action_just_pressed("dev 4"):
+		pass
 
 func new_game():
 	score = 0
