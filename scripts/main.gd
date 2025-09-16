@@ -8,20 +8,18 @@ var score
 @onready var hud = $HUD
 @onready var food_manager = $FoodManager
 @onready var powerup_manager = $PowerupManager
-@onready var music_manager = $MusicManager
 @onready var theme_manager = $ThemeManager
 
 func _ready(): 
 	food_manager.snek_head = snek_head
 	powerup_manager.snek = snek
 	powerup_manager.snek_head = snek_head
-	powerup_manager.music_manager = music_manager
 	powerup_manager.theme_manager = theme_manager
-	music_manager.start()
+	MusicManager.start()
 
 func _process(_delta):
 	if Input.is_action_just_pressed("dev 1"):
-		music_manager.play_random_song()
+		MusicManager.play_random_song()
 	if Input.is_action_just_pressed("dev 2"):
 		powerup_manager.__test(1)
 	if Input.is_action_just_pressed("dev 3"):

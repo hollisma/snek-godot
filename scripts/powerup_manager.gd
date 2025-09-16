@@ -8,7 +8,6 @@ var spawn_time_max = 7 # 7
 @onready var powerup_timer = $PowerupTimer
 var snek: Node
 var snek_head: Node
-var music_manager: Node
 var theme_manager: Node
 
 var powerup_freq_table: Array = []
@@ -74,8 +73,6 @@ func _on_powerup_collected(powerup):
 		powerup.apply_effect()
 	if powerup.has_method("apply_effect_to_snek") and snek != null: 
 		powerup.apply_effect_to_snek(snek)
-	if powerup.has_method("apply_effect_to_music") and music_manager != null: 
-		powerup.apply_effect_to_music(music_manager)
 	powerup.queue_free()
 
 func __test(num): 
