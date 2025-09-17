@@ -19,6 +19,7 @@ config/icon="res://art/icon.svg"
 
 ThemeManager="*res://scripts/theme_manager.gd"
 MusicManager="*res://scenes/music_manager.tscn"
+LevelManager="*res://scripts/level_manager.gd"
 
 [global_group]
 

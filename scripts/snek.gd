@@ -9,7 +9,7 @@ signal snek_death
 @export var segment_distance_constant = 2400.0
 
 var speed = default_speed
-var segment_distance = 42.0
+var segment_distance = 46.0
 var moving = false
 
 # Store { position, distance }

@@ -5,10 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://3bretq8smwia" path="res://scenes/hud.tscn" id="3_sugp2"]
 [ext_resource type="Script" uid="uid://gxagw548l4ud" path="res://scripts/food_manager.gd" id="4_jyhfs"]
 [ext_resource type="Script" uid="uid://brxig4gnqxov1" path="res://scripts/powerup_manager.gd" id="5_tbgi4"]
-[ext_resource type="PackedScene" uid="uid://fbvdjq64klcd" path="res://scenes/speed_up_power.tscn" id="6_tefeu"]
-[ext_resource type="PackedScene" uid="uid://c7gesy6mgxwbv" path="res://scenes/slow_down_power.tscn" id="7_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://fbvdjq64klcd" path="res://scenes/speed_power.tscn" id="6_tefeu"]
+[ext_resource type="PackedScene" uid="uid://c7gesy6mgxwbv" path="res://scenes/slow_power.tscn" id="7_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://br5ehq457aahs" path="res://scenes/music_power.tscn" id="8_eb6dy"]
-[ext_resource type="PackedScene" uid="uid://bry6emtqt1k87" path="res://scenes/visual_theme_power.tscn" id="9_trceg"]
+[ext_resource type="PackedScene" uid="uid://bry6emtqt1k87" path="res://scenes/visuals_power.tscn" id="9_trceg"]
 [ext_resource type="PackedScene" uid="uid://8aesp52ka4qr" path="res://scenes/scissors_power.tscn" id="10_jkv2x"]
 [ext_resource type="Script" uid="uid://d2nt2neteuy7u" path="res://scripts/theme_manager.gd" id="14_a8y0u"]
 

@@ -34,8 +34,10 @@ func new_game():
 	get_tree().call_group("powerups", "queue_free")
 	$snek.reset()
 	$snek.start()
-	food_manager.spawn_appl()
-	powerup_manager.start_spawning()
+	_start_level("normal")
+
+func _start_level(level_id: String): 
+	LevelManager.start_level(level_id, powerup_manager, food_manager)
 
 func _on_appl_eaten(appl): 
 	food_manager.spawn_appl()

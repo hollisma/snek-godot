@@ -14,10 +14,29 @@ var powerup_freq_table: Array = []
 var total_freq: int = 0
 
 func _ready(): 
+	_apply_default_frequencies()
+
+func _apply_default_frequencies(): 
+	total_freq = 0
+	powerup_freq_table.clear()
 	for scene in powerup_scenes: 
 		var temp = scene.instantiate()
-		var freq = temp.FREQUENCY
+		var freq = temp.FREQUENCY if "FREQUENCY" in temp else 1
 		temp.queue_free()
+		total_freq += freq
+		powerup_freq_table.append({ "scene": scene, "cumulative": total_freq })
+
+func apply_level_data(level_data): 
+	if not level_data.has("powerups"): 
+		return
+	
+	var freqs = level_data["powerups"]
+	total_freq = 0
+	powerup_freq_table.clear()
+	
+	for scene in powerup_scenes: 
+		var key_name = _get_powerup_key(scene)
+		var freq = freqs.get(key_name, 0) # default 0 if powerup not in data
 		total_freq += freq
 		powerup_freq_table.append({ "scene": scene, "cumulative": total_freq })
 
@@ -42,9 +61,14 @@ func spawn_powerup():
 	var scene = _pick_powerup()
 	var powerup = scene.instantiate()
 	powerup.global_position = _get_spawn_location()
-	
 	call_deferred("add_child", powerup)
 	powerup.collected.connect(_on_powerup_collected)
+
+func _get_powerup_key(scene: PackedScene) -> String: 
+	var filename = scene.resource_path.get_file()
+	var name = filename.get_basename() # "speed_power"
+	name = name.replace("_power", "")         # "speed"
+	return name
 
 func _pick_powerup() -> PackedScene: 
 	var roll = randi_range(1, total_freq)
@@ -64,7 +88,6 @@ func _get_spawn_location():
 		pos = Vector2(x, y)
 		if snek_head.position.distance_to(pos) > margin * 2: 
 			break
-	
 	return pos
 
 func _on_powerup_collected(powerup): 
