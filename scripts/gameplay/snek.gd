@@ -40,6 +40,7 @@ func start():
 	show()
 
 func reset(): 
+	hide()
 	path_points.clear()
 	for segment in segments: 
 		segment.queue_free()
