@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://cob3ywp3v3m6u"]
+
+[ext_resource type="Script" uid="uid://d3x5y4gk1ixqq" path="res://scripts/utils/themed_sprite.gd" id="1_a7yy4"]
+[ext_resource type="Texture2D" uid="uid://38oct50bkvml" path="res://art/snek/snek head - shaded.png" id="1_nsfte"]
+[ext_resource type="Texture2D" uid="uid://wpplswavsuqm" path="res://art/snek/snek head.png" id="2_cwpmm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d75dd"]
+size = Vector2(10, 14.0833)
+
+[node name="Head" type="Area2D" groups=["player", "snek_head"]]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+script = ExtResource("1_a7yy4")
+basic_texture = ExtResource("2_cwpmm")
+shaded_texture = ExtResource("1_nsfte")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-9, 0.125001)
+scale = Vector2(3, 3)
+shape = SubResource("RectangleShape2D_d75dd")

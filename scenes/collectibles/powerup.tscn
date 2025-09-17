@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://b85t84uvic217"]
+
+[ext_resource type="Script" uid="uid://3u6f24l28ekl" path="res://scripts/gameplay/powerup.gd" id="1_8vsy1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mqdrm"]
+size = Vector2(16, 15.3333)
+
+[node name="Powerup" type="Area2D" groups=["powerups"]]
+script = ExtResource("1_8vsy1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(3, 3)
+shape = SubResource("RectangleShape2D_mqdrm")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

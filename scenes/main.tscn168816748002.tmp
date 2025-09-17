@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhhpwwmoo8bwq"]
+
+[ext_resource type="Script" uid="uid://cmwb0xomnmipv" path="res://scripts/main.gd" id="1_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://ulutd5rqohpg" path="res://scenes/snek.tscn" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://gxagw548l4ud" path="res://scripts/food_manager.gd" id="4_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://ciuh7671e6e0w" path="res://scenes/powerup_manager.tscn" id="4_tbgi4"]
+[ext_resource type="Script" uid="uid://d2nt2neteuy7u" path="res://scripts/theme_manager.gd" id="14_a8y0u"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_0wfyh")
+
+[node name="GameplayContainer" type="Node2D" parent="."]
+
+[node name="Snek" parent="GameplayContainer" instance=ExtResource("1_o5qli")]
+position = Vector2(10, 324)
+
+[node name="FoodManager" type="Node2D" parent="GameplayContainer"]
+script = ExtResource("4_jyhfs")
+
+[node name="GoldenApplTimer" type="Timer" parent="GameplayContainer/FoodManager"]
+one_shot = true
+
+[node name="PowerupManager" parent="GameplayContainer" instance=ExtResource("4_tbgi4")]
+
+[node name="ThemeManager" type="Node" parent="GameplayContainer"]
+script = ExtResource("14_a8y0u")
+
+[node name="UIContainer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="appl_eaten" from="GameplayContainer/Snek" to="." method="_on_appl_eaten"]
+[connection signal="snek_death" from="GameplayContainer/Snek" to="." method="_on_snek_death"]
+[connection signal="timeout" from="GameplayContainer/FoodManager/GoldenApplTimer" to="GameplayContainer/FoodManager" method="_on_GoldenApplTimer_timeout"]

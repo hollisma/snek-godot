@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqlow4r4p2vsj"]
+
+[ext_resource type="Script" uid="uid://bntlt8sw1xpm6" path="res://scripts/ui/level_end_screen.gd" id="1_2noh8"]
+[ext_resource type="Theme" uid="uid://c0l7wt3bpvf85" path="res://themes/Button.tres" id="2_p7k1k"]
+
+[node name="LevelEndScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_2noh8")
+
+[node name="ScoreLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 418.0
+offset_top = 125.0
+offset_right = 801.0
+offset_bottom = 212.0
+theme_override_font_sizes/font_size = 77
+
+[node name="Buttons" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 292.0
+offset_top = 383.0
+offset_right = 868.0
+offset_bottom = 482.0
+theme_override_constants/separation = 85
+alignment = 1
+
+[node name="ReplayButton" type="Button" parent="Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_p7k1k")
+
+[node name="LevelSelectButton" type="Button" parent="Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_p7k1k")
+
+[node name="NextButton" type="Button" parent="Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_p7k1k")

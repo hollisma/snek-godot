@@ -17,9 +17,10 @@ config/icon="res://art/icon.svg"
 
 [autoload]
 
-ThemeManager="*res://scripts/theme_manager.gd"
-MusicManager="*res://scenes/music_manager.tscn"
-LevelManager="*res://scripts/level_manager.gd"
+ThemeManager="*res://scripts/managers/theme_manager.gd"
+MusicManager="*res://scenes/managers/music_manager.tscn"
+LevelManager="*res://scripts/managers/level_manager.gd"
+ResourcePaths="*res://scripts/utils/resource_paths.gd"
 
 [global_group]
 

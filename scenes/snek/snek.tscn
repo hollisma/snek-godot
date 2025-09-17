@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://ulutd5rqohpg"]
+
+[ext_resource type="Script" uid="uid://dg4fxqt6tlbad" path="res://scripts/gameplay/snek.gd" id="1_txyyv"]
+[ext_resource type="PackedScene" uid="uid://cob3ywp3v3m6u" path="res://scenes/snek/head.tscn" id="1_ylq5c"]
+
+[node name="Snek" type="Node2D"]
+script = ExtResource("1_txyyv")
+
+[node name="Head" parent="." instance=ExtResource("1_ylq5c")]
+position = Vector2(24, -1)
+
+[node name="BodySegments" type="Node2D" parent="."]
+
+[connection signal="area_entered" from="Head" to="." method="_on_head_area_entered"]

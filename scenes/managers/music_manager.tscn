@@ -1,0 +1,15 @@
+[gd_scene load_steps=8 format=3 uid="uid://c44ue0agnewtx"]
+
+[ext_resource type="Script" uid="uid://b8qt6vsq6gyof" path="res://scripts/managers/music_manager.gd" id="1_wgwyw"]
+[ext_resource type="AudioStream" uid="uid://rfyspyj7wr5t" path="res://audio/music/Running.ogg" id="2_nncsl"]
+[ext_resource type="AudioStream" uid="uid://cendxsap3d6xu" path="res://audio/music/Autumn leaves.ogg" id="3_8ayo1"]
+[ext_resource type="AudioStream" uid="uid://c81nx20io7ayq" path="res://audio/music/Arpeggio with beats.ogg" id="4_6rwe7"]
+[ext_resource type="AudioStream" uid="uid://cgaor38wy3xt3" path="res://audio/music/Spooky Castle.ogg" id="5_bqwxb"]
+[ext_resource type="AudioStream" uid="uid://dhn8o55uwpjpu" path="res://audio/music/Nostalgia.ogg" id="6_sal0n"]
+[ext_resource type="AudioStream" uid="uid://bq6sr4v26kt0s" path="res://audio/music/Punk Battle.ogg" id="7_huevb"]
+
+[node name="MusicManager" type="Node"]
+script = ExtResource("1_wgwyw")
+songs = Array[AudioStream]([ExtResource("2_nncsl"), ExtResource("3_8ayo1"), ExtResource("4_6rwe7"), ExtResource("5_bqwxb"), ExtResource("6_sal0n"), ExtResource("7_huevb")])
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]

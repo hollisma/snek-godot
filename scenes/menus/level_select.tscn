@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://crr2lwvcxxb5y"]
+
+[ext_resource type="Script" uid="uid://dguj7inq1g6rd" path="res://scripts/ui/level_select.gd" id="1_pymjq"]
+[ext_resource type="Theme" uid="uid://c0l7wt3bpvf85" path="res://themes/Button.tres" id="2_1g16o"]
+
+[node name="LevelSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_pymjq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 39.0
+offset_right = 1085.0
+offset_bottom = 585.0
+theme_override_constants/separation = 35
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource("2_1g16o")
+text = "Select A Level"
+
+[node name="LevelButtons" type="GridContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_1g16o")
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 4
+
+[node name="BottomContainer" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="VBoxContainer/BottomContainer"]
+custom_minimum_size = Vector2(150, 75)
+layout_mode = 2
+theme = ExtResource("2_1g16o")
+text = "Back"
