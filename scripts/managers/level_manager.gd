@@ -110,4 +110,42 @@ var levels = {
 			"visuals": 1,
 		}
 	},
+	"Random A": {
+		"name": "Random A", 
+		"win_cons": [
+			{
+				"con_type": "length",
+				"comparator": "over",
+				"value": 3,
+			},
+		],
+		"lose_cons": [],
+		"music": ResourcePaths.MUSIC["feeding_time"], 
+		"powerups": {
+			"speed": 4,
+			"slow": 4,
+			"scissors": 2,
+			"music": 1,
+			"visuals": 1,
+		}
+	},
+	"Random B": {
+		"name": "Random B", 
+		"win_cons": [],
+		"lose_cons": [
+			{
+				"con_type": "length",
+				"comparator": "over",
+				"value": 3,
+			},
+		],
+		"music": ResourcePaths.MUSIC["feeding_time"], 
+		"powerups": {
+			"speed": 4,
+			"slow": 4,
+			"scissors": 2,
+			"music": 1,
+			"visuals": 1,
+		}
+	},
 }

@@ -37,9 +37,11 @@ func _physics_process(delta):
 	_check_self_collision()
 
 func start(): 
-	speed = default_speed
+	reset()
 	moving = true
 	show()
+	emit_signal("speed_changed", default_speed)
+	emit_signal("length_changed", segments.size())
 
 func stop(): 
 	moving = false
@@ -51,6 +53,7 @@ func reset():
 		segment.queue_free()
 	segments.clear()
 	start_index = 0
+	speed = default_speed
 	direction = Vector2.RIGHT
 	$Head.rotation = 0
 	$Head.global_position = Vector2(10, screen_size.y / 2)

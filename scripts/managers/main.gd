@@ -66,10 +66,11 @@ func _on_level_chosen(level_id: String):
 	clear_node(ui_container)
 	_reset_gameplay_container()
 	_create_hud()
-	hud.update_score(score)
 	
-	snek.start()
+	objective_manager.condition_updated.connect(hud.update_score_display)
 	LevelManager.start_level(objective_manager, powerup_manager, food_manager, level_id)
+	_update_score(0)
+	snek.start()
 	game_state = GameState.IN_GAME
 
 func _replay_level(): 
@@ -84,17 +85,15 @@ func _start_next_level():
 ########################
 
 func _on_objectives_completed(outcome): 
-	if outcome == objective_manager.Outcome.WIN: 
+	if outcome == GameEnums.Outcome.WIN: 
 		_do_level_end_screen(true)
-	elif outcome == objective_manager.Outcome.LOSE: 
+	elif outcome == GameEnums.Outcome.LOSE: 
 		_do_level_end_screen(false)
 
 func _on_appl_eaten(appl): 
 	food_manager.spawn_appl()
-	score += appl.points
-	if hud != null: 
-		hud.update_score(score)
-	objective_manager.update_condition(objective_manager.ConditionType.SCORE, score)
+	var new_score = score + appl.points
+	_update_score(new_score)
 	appl.queue_free()
 
 func _on_snek_death(): 
@@ -103,10 +102,10 @@ func _on_snek_death():
 	_do_level_end_screen(false)
 
 func _on_snek_length_changed(length):
-	objective_manager.update_condition(objective_manager.ConditionType.LENGTH, length)
+	objective_manager.update_condition(GameEnums.ConditionType.LENGTH, length)
 
 func _on_snek_speed_changed(speed): 
-	objective_manager.update_condition(objective_manager.ConditionType.SPEED, speed)
+	objective_manager.update_condition(GameEnums.ConditionType.SPEED, speed)
 
 ###############
 ### HELPERS ###
@@ -121,6 +120,10 @@ func _reset_gameplay_container():
 	get_tree().call_group("powerups", "queue_free")
 	snek.reset()
 	score = 0
+
+func _update_score(new_score: int): 
+	score = new_score
+	objective_manager.update_condition(GameEnums.ConditionType.SCORE, score)
 
 # DEV buttons
 func _process(_delta):

@@ -21,6 +21,7 @@ ThemeManager="*res://scripts/managers/theme_manager.gd"
 MusicManager="*res://scenes/managers/music_manager.tscn"
 LevelManager="*res://scripts/managers/level_manager.gd"
 ResourcePaths="*res://scripts/utils/resource_paths.gd"
+GameEnums="*res://scripts/utils/game_enums.gd"
 
 [global_group]
 

@@ -15,7 +15,7 @@ func _populate_levels():
 	for level_id in LevelManager.levels.keys(): 
 		var button = Button.new()
 		button.text = LevelManager.levels[level_id]["name"]
-		button.custom_minimum_size = Vector2(250, 100)
+		button.custom_minimum_size = Vector2(225, 90)
 		button.pressed.connect(_on_level_selected.bind(level_id))
 		level_buttons.add_child(button)
 

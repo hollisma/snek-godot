@@ -5,6 +5,7 @@ enum Comparator { OVER, UNDER } # OVER is >= THRESHOLD, UNDER is < THRESHOLD
 enum Outcome { WIN, LOSE }
 
 signal objectives_completed(outcome: Outcome)
+signal condition_updated(con_type: ConditionType, current: int, target: int)
 
 var win_conditions: Array = [] # [ (ConditionType.SCORE, Comparator.OVER, 10), ... ]
 var lose_conditions: Array = [] # [ (ConditionType.LENGTH, Comparator.UNDER, 3), ... ]
@@ -37,15 +38,19 @@ func update_condition(condition_type: ConditionType, value: int):
 		return
 	
 	progress[condition_type] = value
-
-	# Check lose first
+	
+	# Update others on progress
+	for win_con in win_conditions: 
+		if win_con[0] == condition_type: 
+			condition_updated.emit(condition_type, value, win_con[2])
+	
+	# Check win / lose logic (lose first)
 	for lose_con in lose_conditions: 
 		var con_type = lose_con[0]
 		if condition_type == con_type and _value_meets(lose_con, value): 
 			objectives_completed.emit(Outcome.LOSE)
 			outcome_emitted = true
 	
-	# Check if all win conditions are met
 	if _all_win_cons_met(): 
 		objectives_completed.emit(Outcome.WIN)
 		outcome_emitted = true
