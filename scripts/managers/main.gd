@@ -10,13 +10,16 @@ var score
 @onready var food_manager = $GameplayContainer/FoodManager
 @onready var powerup_manager = $GameplayContainer/PowerupManager
 @onready var theme_manager = $GameplayContainer/ThemeManager
+@onready var objective_manager = $GameplayContainer/ObjectiveManager
 var hud: CanvasLayer
 
 func _ready(): 
 	MusicManager.start()
 	_show_level_select()
 
+#############
 ### MENUS ###
+#############
 
 func _create_hud(): 
 	clear_node(ui_container)
@@ -39,7 +42,9 @@ func _do_level_end_screen():
 	level_end_screen.level_select_pressed.connect(func(): _show_level_select())
 	level_end_screen.next_level_pressed.connect(func(): _start_next_level())
 
+##################
 ### MENU LOGIC ###
+##################
 
 func _on_level_chosen(level_id: String): 
 	clear_node(ui_container)
@@ -56,7 +61,7 @@ func _on_level_chosen(level_id: String):
 	powerup_manager.snek_head = snek_head
 	snek.start()
 	
-	LevelManager.start_level(powerup_manager, food_manager, level_id)
+	LevelManager.start_level(objective_manager, powerup_manager, food_manager, level_id)
 
 func _replay_level(): 
 	_on_level_chosen(LevelManager.current_level_id)
@@ -65,12 +70,15 @@ func _start_next_level():
 	# TODO: Implement this
 	_on_level_chosen(LevelManager.current_level_id)
 
+########################
 ### GAMEPLAY SIGNALS ###
+########################
 
 func _on_appl_eaten(appl): 
 	food_manager.spawn_appl()
 	score += appl.points
 	hud.update_score(score)
+	objective_manager.update_condition(objective_manager.ConditionType.SCORE, score)
 	appl.queue_free()
 
 func _on_snek_death(): 
@@ -78,7 +86,15 @@ func _on_snek_death():
 	powerup_manager.stop()
 	_do_level_end_screen()
 
+func _on_objectives_completed(outcome): 
+	if outcome == objective_manager.Outcome.WIN: 
+		print("Winner Winner CHicken Dinner!!!")
+	elif outcome == objective_manager.Outcome.LOSE: 
+		print("Loserrrrr")
+
+###############
 ### HELPERS ###
+###############
 
 func clear_node(node: Node):
 	for child in node.get_children(): 

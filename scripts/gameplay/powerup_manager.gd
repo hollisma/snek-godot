@@ -61,7 +61,6 @@ func _on_powerup_timer_timeout():
 
 func _restart_timer():
 	var spawn_time = randi_range(spawn_time_min, spawn_time_max)
-	print("_restart_timer: ", powerup_timer)
 	powerup_timer.start(spawn_time)
 
 func _get_powerup_key(scene: PackedScene) -> String: 
@@ -91,7 +90,6 @@ func _get_spawn_location():
 	return pos
 
 func _on_powerup_collected(powerup): 
-	print("powerup collected: %s" % powerup)
 	if powerup.has_method("apply_effect"): 
 		powerup.apply_effect()
 	if powerup.has_method("apply_effect_to_snek") and snek != null: 

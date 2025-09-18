@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dhhpwwmoo8bwq"]
+[gd_scene load_steps=12 format=3 uid="uid://dhhpwwmoo8bwq"]
 
 [ext_resource type="Script" uid="uid://cmwb0xomnmipv" path="res://scripts/managers/main.gd" id="1_ikj0o"]
 [ext_resource type="PackedScene" uid="uid://ulutd5rqohpg" path="res://scenes/snek/snek.tscn" id="2_7s71p"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bry6emtqt1k87" path="res://scenes/collectibles/visuals_power.tscn" id="8_nnfb3"]
 [ext_resource type="PackedScene" uid="uid://8aesp52ka4qr" path="res://scenes/collectibles/scissors_power.tscn" id="9_dwgmp"]
 [ext_resource type="Script" uid="uid://d2nt2neteuy7u" path="res://scripts/managers/theme_manager.gd" id="10_s6uy5"]
+[ext_resource type="Script" uid="uid://cf6ex1ewcbcid" path="res://scripts/managers/objective_manager.gd" id="11_7s71p"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_ikj0o")
@@ -34,6 +35,9 @@ powerup_scenes = Array[PackedScene]([ExtResource("5_g2fy6"), ExtResource("6_qj64
 [node name="ThemeManager" type="Node" parent="GameplayContainer"]
 script = ExtResource("10_s6uy5")
 
+[node name="ObjectiveManager" type="Node" parent="GameplayContainer"]
+script = ExtResource("11_7s71p")
+
 [node name="UIContainer" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -44,3 +48,4 @@ offset_bottom = 40.0
 [connection signal="snek_death" from="GameplayContainer/Snek" to="." method="_on_snek_death"]
 [connection signal="timeout" from="GameplayContainer/FoodManager/GoldenApplTimer" to="GameplayContainer/FoodManager" method="_on_GoldenApplTimer_timeout"]
 [connection signal="timeout" from="GameplayContainer/PowerupManager/PowerupTimer" to="GameplayContainer/PowerupManager" method="_on_powerup_timer_timeout"]
+[connection signal="objectives_completed" from="GameplayContainer/ObjectiveManager" to="." method="_on_objectives_completed"]

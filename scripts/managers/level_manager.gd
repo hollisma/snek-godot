@@ -5,7 +5,7 @@ var data: Dictionary = {}
 
 func set_level(level_id: String): 
 	if not levels.has(level_id): 
-		print("Level does not exist: ", level_id)
+		push_error("Level does not exist: ", level_id)
 		return
 	print("Setting level ", level_id)
 	current_level_id = level_id
@@ -13,17 +13,18 @@ func set_level(level_id: String):
 
 # If `level_id` is provided, it will set and start that level.
 # Otherwise, it assumes a level has already been set with set_level().
-func start_level(powerup_manager: Node, food_manager: Node, level_id: String = ""): 
+func start_level(objective_manager: Node, powerup_manager: Node, food_manager: Node, level_id: String = ""): 
 	if level_id != "": 
 		if not levels.has(level_id): 
-			print("Level does not exist: ", level_id)
+			push_error("Level does not exist: ", level_id)
 			return
 		set_level(level_id)
 	elif current_level_id == "": 
-		print("Error: no level set. Call set_level() or pass valid level_id")
+		push_error("Error: no level set. Call set_level() or pass valid level_id")
 	
 	print("Starting level ", level_id)	
 	MusicManager.play_song(load(data["music"]))
+	objective_manager.apply_level_data(data)
 	powerup_manager.apply_level_data(data)
 	powerup_manager.start_spawning()
 	food_manager.spawn_appl()
@@ -36,8 +37,14 @@ func NOT_USED_get_current_level_data() -> Dictionary:
 var levels = {
 	"normal": {
 		"name": "Normal",
-		"win_con": "score", 
-		"win_value": 25,
+		"win_cons": [
+			{
+				"con_type": "score",
+				"comparator": "over",
+				"value": 5, # 50
+			},
+		],
+		"lose_cons": [],
 		"music": ResourcePaths.MUSIC["default"], 
 		"powerups": {
 			"speed": 4,
@@ -49,8 +56,14 @@ var levels = {
 	},
 	"feeding_time": {
 		"name": "Feeding Time", 
-		"win_con": "length", 
-		"win_value": 25,
+		"win_cons": [
+			{
+				"con_type": "length",
+				"comparator": "over",
+				"value": 25,
+			},
+		],
+		"lose_cons": [],
 		"music": ResourcePaths.MUSIC["feeding_time"], 
 		"powerups": {
 			"speed": 2,
