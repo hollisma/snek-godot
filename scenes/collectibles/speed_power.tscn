@@ -8,7 +8,6 @@
 
 [node name="SpeedUpPower" instance=ExtResource("1_48ob4")]
 script = ExtResource("2_c3pg4")
-speed_increase = 30.0
 
 [node name="Sprite2D" parent="." index="0"]
 script = ExtResource("3_trs12")

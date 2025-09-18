@@ -5,9 +5,10 @@ signal snek_death
 signal speed_changed
 signal length_changed
 
-@export var default_speed: float = 175.0
-@export var min_speed: float = 50.0
-@export var collision_distance = 25.0
+const SPEED_TO_PIXELS: float = 35.0
+const COLLISION_DISTANCE = 25.0
+@export var default_speed: float = 5.0
+@export var min_speed: float = 1.0
 @export var segment_distance_constant = 2400.0
 
 var speed = default_speed
@@ -96,7 +97,8 @@ func _handle_input():
 
 func _move(delta): 
 	var old_pos = $Head.position
-	$Head.position += direction * speed * delta
+	var pixel_speed = speed * SPEED_TO_PIXELS
+	$Head.position += direction * pixel_speed * delta
 	
 	var distance_moved = $Head.position.distance_to(old_pos)
 	var cumulative_distance = distance_moved
@@ -150,7 +152,7 @@ func _check_boundary():
 func _check_self_collision(): 
 	var safe_distance = 1 # Colliding with first N segments is safe
 	for i in range(safe_distance, segments.size()): 
-		if $Head.global_position.distance_to(segments[i].global_position) < collision_distance: 
+		if $Head.global_position.distance_to(segments[i].global_position) < COLLISION_DISTANCE: 
 			snek_death.emit()
 			break
 

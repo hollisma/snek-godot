@@ -8,7 +8,6 @@
 
 [node name="SlowDownPower" instance=ExtResource("1_djsvb")]
 script = ExtResource("2_08vru")
-speed_decrease = -30.0
 
 [node name="Sprite2D" parent="." index="0"]
 script = ExtResource("3_owvvf")

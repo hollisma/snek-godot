@@ -29,11 +29,6 @@ func start_level(objective_manager: Node, powerup_manager: Node, food_manager: N
 	powerup_manager.start_spawning()
 	food_manager.spawn_appl()
 
-func NOT_USED_get_current_level_data() -> Dictionary: 
-	if current_level_id == "": 
-		return {}
-	return levels[current_level_id]
-
 var levels = {
 	"normal": {
 		"name": "Normal",
@@ -72,6 +67,28 @@ var levels = {
 			"visuals": 5, # "fatten": 5,
 		}
 	},
+	"escape": {
+		"name": "Escape", 
+		"win_cons": [
+			{
+				"con_type": "speed",
+				"comparator": "over",
+				"value": 15, # 15
+			},
+		],
+		"lose_cons": [],
+		"music": ResourcePaths.MUSIC["escape"], 
+		"powerups": {
+			"speed": 4,
+			"slow": 3,
+			"scissors": 2,
+			"visuals": 1, # "fatten": 1,
+		}
+	},
+	
+	##################
+	### Dev levels ###
+	##################
 	"easy_len": {
 		"name": "easy_len", 
 		"win_cons": [
