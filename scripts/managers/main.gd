@@ -1,7 +1,6 @@
 extends Node
 
 var appl_scene: PackedScene = preload(ResourcePaths.SCENES["appl"])
-var score
 
 @onready var gameplay_container = $GameplayContainer
 @onready var ui_container = $UIContainer
@@ -12,6 +11,9 @@ var score
 @onready var theme_manager = $GameplayContainer/ThemeManager
 @onready var objective_manager = $GameplayContainer/ObjectiveManager
 var hud: CanvasLayer
+
+var score: int = -1
+var on_end_screen: bool = false
 
 func _ready(): 
 	MusicManager.start()
@@ -33,14 +35,21 @@ func _show_level_select():
 	ui_container.add_child(level_select)
 	level_select.level_chosen.connect(_on_level_chosen)
 
-func _do_level_end_screen(): 
+func _do_level_end_screen(level_won: bool): 
+	if on_end_screen: 
+		return
+	
+	clear_node(ui_container)
 	var level_end_screen = preload(ResourcePaths.SCENES["level_end_screen"]).instantiate()
 	ui_container.add_child(level_end_screen)
+	on_end_screen = true
 	
 	level_end_screen.show_score(score)
 	level_end_screen.replay_pressed.connect(func(): _replay_level())
 	level_end_screen.level_select_pressed.connect(func(): _show_level_select())
 	level_end_screen.next_level_pressed.connect(func(): _start_next_level())
+	
+	level_end_screen.apply_outcome(level_won)
 
 ##################
 ### MENU LOGIC ###
@@ -77,8 +86,10 @@ func _start_next_level():
 func _on_objectives_completed(outcome): 
 	if outcome == objective_manager.Outcome.WIN: 
 		print("Winner Winner CHicken Dinner!!!")
+		_do_level_end_screen(true)
 	elif outcome == objective_manager.Outcome.LOSE: 
 		print("Loserrrrr")
+		_do_level_end_screen(false)
 
 func _on_appl_eaten(appl): 
 	food_manager.spawn_appl()
@@ -90,7 +101,7 @@ func _on_appl_eaten(appl):
 func _on_snek_death(): 
 	snek.stop()
 	powerup_manager.stop()
-	_do_level_end_screen()
+	_do_level_end_screen(false)
 
 func _on_snek_length_changed(length):
 	print("length to %d" % length) 

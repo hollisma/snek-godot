@@ -71,5 +71,43 @@ var levels = {
 			"scissors": 3,
 			"visuals": 5, # "fatten": 5,
 		}
-	}
+	},
+	"easy_score": {
+		"name": "easy_score", 
+		"win_cons": [
+			{
+				"con_type": "score",
+				"comparator": "over",
+				"value": 3,
+			},
+		],
+		"lose_cons": [],
+		"music": ResourcePaths.MUSIC["feeding_time"], 
+		"powerups": {
+			"speed": 4,
+			"slow": 4,
+			"scissors": 2,
+			"music": 1,
+			"visuals": 1,
+		}
+	},
+	"easy_score_lose": {
+		"name": "easy_score_lose", 
+		"win_cons": [],
+		"lose_cons": [
+			{
+				"con_type": "score",
+				"comparator": "over",
+				"value": 3,
+			},
+		],
+		"music": ResourcePaths.MUSIC["feeding_time"], 
+		"powerups": {
+			"speed": 4,
+			"slow": 4,
+			"scissors": 2,
+			"music": 1,
+			"visuals": 1,
+		}
+	},
 }

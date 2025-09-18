@@ -10,34 +10,48 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_2noh8")
 
-[node name="ScoreLabel" type="Label" parent="."]
+[node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 418.0
-offset_top = 125.0
-offset_right = 801.0
-offset_bottom = 212.0
-theme_override_font_sizes/font_size = 77
+offset_left = 59.0
+offset_top = 40.0
+offset_right = 1100.0
+offset_bottom = 608.0
 
-[node name="Buttons" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 292.0
-offset_top = 383.0
-offset_right = 868.0
-offset_bottom = 482.0
+[node name="MessageLabel" type="Label" parent="VBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+size_flags_stretch_ratio = 0.75
+theme = ExtResource("2_p7k1k")
+theme_override_font_sizes/font_size = 76
+
+[node name="ScoreLabel" type="Label" parent="VBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+size_flags_stretch_ratio = 1.25
+theme_override_font_sizes/font_size = 57
+
+[node name="Buttons" type="HBoxContainer" parent="VBox"]
+custom_minimum_size = Vector2(800, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+size_flags_stretch_ratio = 0.75
 theme_override_constants/separation = 85
 alignment = 1
 
-[node name="ReplayButton" type="Button" parent="Buttons"]
+[node name="ReplayButton" type="Button" parent="VBox/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_p7k1k")
 
-[node name="LevelSelectButton" type="Button" parent="Buttons"]
+[node name="LevelSelectButton" type="Button" parent="VBox/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_p7k1k")
 
-[node name="NextButton" type="Button" parent="Buttons"]
+[node name="NextButton" type="Button" parent="VBox/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_p7k1k")

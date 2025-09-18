@@ -54,6 +54,9 @@ func update_condition(condition_type: ConditionType, value: int):
 ###############
 
 func _all_win_cons_met() -> bool:
+	if win_conditions.size() == 0: 
+		return false
+	
 	for win_con in win_conditions: 
 		var con_type = win_con[0]
 		var value = progress.get(con_type, -1)
