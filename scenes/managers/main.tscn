@@ -45,7 +45,9 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [connection signal="appl_eaten" from="GameplayContainer/Snek" to="." method="_on_appl_eaten"]
+[connection signal="length_changed" from="GameplayContainer/Snek" to="." method="_on_snek_length_changed"]
 [connection signal="snek_death" from="GameplayContainer/Snek" to="." method="_on_snek_death"]
+[connection signal="speed_changed" from="GameplayContainer/Snek" to="." method="_on_snek_speed_changed"]
 [connection signal="timeout" from="GameplayContainer/FoodManager/GoldenApplTimer" to="GameplayContainer/FoodManager" method="_on_GoldenApplTimer_timeout"]
 [connection signal="timeout" from="GameplayContainer/PowerupManager/PowerupTimer" to="GameplayContainer/PowerupManager" method="_on_powerup_timer_timeout"]
 [connection signal="objectives_completed" from="GameplayContainer/ObjectiveManager" to="." method="_on_objectives_completed"]

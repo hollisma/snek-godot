@@ -8,6 +8,7 @@ signal objectives_completed(outcome: Outcome)
 
 var win_conditions: Array = [] # [ (ConditionType.SCORE, Comparator.OVER, 10), ... ]
 var lose_conditions: Array = [] # [ (ConditionType.LENGTH, Comparator.UNDER, 3), ... ]
+var outcome_emitted: bool = false
 
 var progress = {} # { ConditionType.SCORE: 0, ConditionType.SPEED: 150, ... }
 
@@ -31,6 +32,9 @@ func apply_level_data(level_data: Dictionary):
 	progress.clear()
 
 func update_condition(condition_type: ConditionType, value: int): 
+	if outcome_emitted: 
+		return
+	
 	progress[condition_type] = value
 
 	# Check lose first
@@ -38,10 +42,12 @@ func update_condition(condition_type: ConditionType, value: int):
 		var con_type = lose_con[0]
 		if condition_type == con_type and _value_meets(lose_con, value): 
 			objectives_completed.emit(Outcome.LOSE)
+			outcome_emitted = true
 	
 	# Check if all win conditions are met
 	if _all_win_cons_met(): 
 		objectives_completed.emit(Outcome.WIN)
+		outcome_emitted = true
 
 ###############
 ### HELPERS ###
@@ -50,7 +56,9 @@ func update_condition(condition_type: ConditionType, value: int):
 func _all_win_cons_met() -> bool:
 	for win_con in win_conditions: 
 		var con_type = win_con[0]
-		var value = progress.get(con_type, 0)
+		var value = progress.get(con_type, -1)
+		if value == -1: 
+			return false
 		if not _value_meets(win_con, value): 
 			return false
 	return true

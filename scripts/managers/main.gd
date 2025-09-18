@@ -74,6 +74,12 @@ func _start_next_level():
 ### GAMEPLAY SIGNALS ###
 ########################
 
+func _on_objectives_completed(outcome): 
+	if outcome == objective_manager.Outcome.WIN: 
+		print("Winner Winner CHicken Dinner!!!")
+	elif outcome == objective_manager.Outcome.LOSE: 
+		print("Loserrrrr")
+
 func _on_appl_eaten(appl): 
 	food_manager.spawn_appl()
 	score += appl.points
@@ -86,11 +92,13 @@ func _on_snek_death():
 	powerup_manager.stop()
 	_do_level_end_screen()
 
-func _on_objectives_completed(outcome): 
-	if outcome == objective_manager.Outcome.WIN: 
-		print("Winner Winner CHicken Dinner!!!")
-	elif outcome == objective_manager.Outcome.LOSE: 
-		print("Loserrrrr")
+func _on_snek_length_changed(length):
+	print("length to %d" % length) 
+	objective_manager.update_condition(objective_manager.ConditionType.LENGTH, length)
+
+func _on_snek_speed_changed(speed): 
+	print("speed to %d" % speed) 
+	objective_manager.update_condition(objective_manager.ConditionType.SPEED, speed)
 
 ###############
 ### HELPERS ###

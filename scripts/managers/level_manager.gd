@@ -41,7 +41,7 @@ var levels = {
 			{
 				"con_type": "score",
 				"comparator": "over",
-				"value": 5, # 50
+				"value": 50, # 50
 			},
 		],
 		"lose_cons": [],
@@ -60,7 +60,7 @@ var levels = {
 			{
 				"con_type": "length",
 				"comparator": "over",
-				"value": 25,
+				"value": 25, # 25
 			},
 		],
 		"lose_cons": [],

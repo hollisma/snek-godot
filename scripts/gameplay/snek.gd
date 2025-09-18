@@ -2,6 +2,8 @@ extends Node2D
 
 signal appl_eaten
 signal snek_death
+signal speed_changed
+signal length_changed
 
 @export var default_speed: float = 175.0
 @export var min_speed: float = 50.0
@@ -127,12 +129,14 @@ func grow():
 	var new_segment = body_scene.instantiate()
 	$BodySegments.call_deferred("add_child", new_segment)
 	segments.append(new_segment)
-
-func stop(): 
-	moving = false
+	emit_signal("length_changed", segments.size())
 
 func change_speed(speed_change): 
 	speed = max(speed + speed_change, min_speed)
+	emit_signal("speed_changed", speed)
+
+func stop(): 
+	moving = false
 
 func trim_body(segment_num_input): 
 	var segment_num = min(segment_num_input, segments.size())
