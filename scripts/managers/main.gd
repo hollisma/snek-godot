@@ -1,5 +1,7 @@
 extends Node
 
+enum GameState { MAIN_MENU, LEVEL_SELECT, IN_GAME, LEVEL_END_SCREEN }
+
 var appl_scene: PackedScene = preload(ResourcePaths.SCENES["appl"])
 
 @onready var gameplay_container = $GameplayContainer
@@ -13,9 +15,13 @@ var appl_scene: PackedScene = preload(ResourcePaths.SCENES["appl"])
 var hud: CanvasLayer
 
 var score: int = -1
-var on_end_screen: bool = false
+var game_state: GameState = GameState.MAIN_MENU
 
 func _ready(): 
+	food_manager.snek_head = snek_head
+	powerup_manager.snek = snek
+	powerup_manager.snek_head = snek_head
+	
 	MusicManager.start()
 	_show_level_select()
 
@@ -34,15 +40,15 @@ func _show_level_select():
 	var level_select = preload(ResourcePaths.SCENES["level_select"]).instantiate()
 	ui_container.add_child(level_select)
 	level_select.level_chosen.connect(_on_level_chosen)
+	game_state = GameState.LEVEL_SELECT
 
 func _do_level_end_screen(level_won: bool): 
-	if on_end_screen: 
+	if game_state != GameState.IN_GAME: 
 		return
 	
 	clear_node(ui_container)
 	var level_end_screen = preload(ResourcePaths.SCENES["level_end_screen"]).instantiate()
 	ui_container.add_child(level_end_screen)
-	on_end_screen = true
 	
 	level_end_screen.show_score(score)
 	level_end_screen.replay_pressed.connect(func(): _replay_level())
@@ -50,6 +56,7 @@ func _do_level_end_screen(level_won: bool):
 	level_end_screen.next_level_pressed.connect(func(): _start_next_level())
 	
 	level_end_screen.apply_outcome(level_won)
+	game_state = GameState.LEVEL_END_SCREEN
 
 ##################
 ### MENU LOGIC ###
@@ -57,20 +64,13 @@ func _do_level_end_screen(level_won: bool):
 
 func _on_level_chosen(level_id: String): 
 	clear_node(ui_container)
+	_reset_gameplay_container()
 	_create_hud()
-	
-	score = 0
 	hud.update_score(score)
-	get_tree().call_group("appls", "queue_free")
-	get_tree().call_group("powerups", "queue_free")
-	snek.reset()
 	
-	food_manager.snek_head = snek_head
-	powerup_manager.snek = snek
-	powerup_manager.snek_head = snek_head
 	snek.start()
-	
 	LevelManager.start_level(objective_manager, powerup_manager, food_manager, level_id)
+	game_state = GameState.IN_GAME
 
 func _replay_level(): 
 	_on_level_chosen(LevelManager.current_level_id)
@@ -85,16 +85,15 @@ func _start_next_level():
 
 func _on_objectives_completed(outcome): 
 	if outcome == objective_manager.Outcome.WIN: 
-		print("Winner Winner CHicken Dinner!!!")
 		_do_level_end_screen(true)
 	elif outcome == objective_manager.Outcome.LOSE: 
-		print("Loserrrrr")
 		_do_level_end_screen(false)
 
 func _on_appl_eaten(appl): 
 	food_manager.spawn_appl()
 	score += appl.points
-	hud.update_score(score)
+	if hud != null: 
+		hud.update_score(score)
 	objective_manager.update_condition(objective_manager.ConditionType.SCORE, score)
 	appl.queue_free()
 
@@ -104,11 +103,9 @@ func _on_snek_death():
 	_do_level_end_screen(false)
 
 func _on_snek_length_changed(length):
-	print("length to %d" % length) 
 	objective_manager.update_condition(objective_manager.ConditionType.LENGTH, length)
 
 func _on_snek_speed_changed(speed): 
-	print("speed to %d" % speed) 
 	objective_manager.update_condition(objective_manager.ConditionType.SPEED, speed)
 
 ###############
@@ -123,6 +120,7 @@ func _reset_gameplay_container():
 	get_tree().call_group("appls", "queue_free")
 	get_tree().call_group("powerups", "queue_free")
 	snek.reset()
+	score = 0
 
 # DEV buttons
 func _process(_delta):

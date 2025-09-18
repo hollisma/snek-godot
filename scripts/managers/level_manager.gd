@@ -72,11 +72,11 @@ var levels = {
 			"visuals": 5, # "fatten": 5,
 		}
 	},
-	"easy_score": {
-		"name": "easy_score", 
+	"easy_len": {
+		"name": "easy_len", 
 		"win_cons": [
 			{
-				"con_type": "score",
+				"con_type": "length",
 				"comparator": "over",
 				"value": 3,
 			},
@@ -91,12 +91,12 @@ var levels = {
 			"visuals": 1,
 		}
 	},
-	"easy_score_lose": {
-		"name": "easy_score_lose", 
+	"easy_len_lose": {
+		"name": "easy_len_lose", 
 		"win_cons": [],
 		"lose_cons": [
 			{
-				"con_type": "score",
+				"con_type": "length",
 				"comparator": "over",
 				"value": 3,
 			},

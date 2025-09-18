@@ -15,7 +15,7 @@ var segment_distance = 46.0
 var moving = false
 
 # Store { position, distance }
-var path_points: Array = []
+var path_points: Array = [] # Newest point (with highest distance) is appended
 var start_index: int = 0 # Buffer
 
 var segments: Array[Node2D] = []
@@ -29,17 +29,20 @@ func _ready():
 func _physics_process(delta):
 	if not moving: 
 		return
-	handle_input()
-	move(delta)
-	update_segments()
-	trim_path()
-	check_boundary()
-	check_self_collision()
+	_handle_input()
+	_move(delta)
+	_update_segments()
+	_trim_path()
+	_check_boundary()
+	_check_self_collision()
 
 func start(): 
 	speed = default_speed
 	moving = true
 	show()
+
+func stop(): 
+	moving = false
 
 func reset(): 
 	hide()
@@ -47,11 +50,34 @@ func reset():
 	for segment in segments: 
 		segment.queue_free()
 	segments.clear()
+	start_index = 0
 	direction = Vector2.RIGHT
 	$Head.rotation = 0
 	$Head.global_position = Vector2(10, screen_size.y / 2)
 
-func handle_input():
+func change_speed(speed_change): 
+	speed = max(speed + speed_change, min_speed)
+	emit_signal("speed_changed", speed)
+
+func trim_body(segment_num_input): 
+	var segment_num = min(segment_num_input, segments.size())
+	for i in range(segment_num): 
+		var last_segment = segments.pop_back()
+		if last_segment: 
+			last_segment.queue_free()
+
+# Used internally and for dev tools
+func grow(): 
+	var new_segment = body_scene.instantiate()
+	$BodySegments.call_deferred("add_child", new_segment)
+	segments.append(new_segment)
+	emit_signal("length_changed", segments.size())
+
+###############
+### HELPERS ###
+###############
+
+func _handle_input():
 	if Input.is_action_pressed("move_up") and direction != Vector2.DOWN:
 		direction = Vector2.UP
 		$Head.rotation = -PI / 2
@@ -65,7 +91,7 @@ func handle_input():
 		direction = Vector2.RIGHT
 		$Head.rotation = 0
 
-func move(delta): 
+func _move(delta): 
 	var old_pos = $Head.position
 	$Head.position += direction * speed * delta
 	
@@ -79,7 +105,7 @@ func move(delta):
 		"distance": cumulative_distance 
 	})
 
-func update_segments(): 
+func _update_segments(): 
 	if _get_size() == 0: 
 		return
 	
@@ -99,7 +125,7 @@ func update_segments():
 		if dir.length_squared() > 0.0001: 
 			segments[i].rotation = dir.angle()
 
-func trim_path(): 
+func _trim_path(): 
 	if _get_size() == 0: 
 		return
 	
@@ -113,37 +139,17 @@ func trim_path():
 		path_points = path_points.slice(start_index, path_points.size())
 		start_index = 0
 
-func check_boundary(): 
+func _check_boundary(): 
 	var head_pos = $Head.global_position
 	if head_pos.x < 0 or head_pos.x > screen_size.x or head_pos.y < 0 or head_pos.y > screen_size.y: 
 		snek_death.emit()
 
-func check_self_collision(): 
+func _check_self_collision(): 
 	var safe_distance = 1 # Colliding with first N segments is safe
 	for i in range(safe_distance, segments.size()): 
 		if $Head.global_position.distance_to(segments[i].global_position) < collision_distance: 
 			snek_death.emit()
 			break
-
-func grow(): 
-	var new_segment = body_scene.instantiate()
-	$BodySegments.call_deferred("add_child", new_segment)
-	segments.append(new_segment)
-	emit_signal("length_changed", segments.size())
-
-func change_speed(speed_change): 
-	speed = max(speed + speed_change, min_speed)
-	emit_signal("speed_changed", speed)
-
-func stop(): 
-	moving = false
-
-func trim_body(segment_num_input): 
-	var segment_num = min(segment_num_input, segments.size())
-	for i in range(segment_num): 
-		var last_segment = segments.pop_back()
-		if last_segment: 
-			last_segment.queue_free()
 
 func _get_position_at_distance(target_distance: float) -> Vector2:
 	# Boundary checks
@@ -173,12 +179,19 @@ func _get_position_at_distance(target_distance: float) -> Vector2:
 	var t = (target_distance - p0.distance) / (p1.distance - p0.distance)
 	return p0.position.lerp(p1.position, t)
 
+#######################
+### SIGNAL HANDLING ###
+#######################
+
 func _on_head_area_entered(area):
 	if area.is_in_group("appls"): 
 		grow()
 		emit_signal("appl_eaten", area)
 
-# Buffer helpers
+######################
+### BUFFER HELPERS ###
+######################
+
 func _get_size() -> int: 
 	return path_points.size() - start_index
 

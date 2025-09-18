@@ -30,6 +30,7 @@ func apply_level_data(level_data: Dictionary):
 	win_conditions = win_list
 	lose_conditions = lose_list
 	progress.clear()
+	outcome_emitted = false
 
 func update_condition(condition_type: ConditionType, value: int): 
 	if outcome_emitted: 
