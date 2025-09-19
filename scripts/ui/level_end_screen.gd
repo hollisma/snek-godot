@@ -22,9 +22,16 @@ func show_score(score: int):
 	score_label.text = "Score: %d" % score
 	score_label.visible = true
 
-func apply_outcome(level_won: bool): 
-	if not level_won: 
-		next_button.disabled = true
-		message_label.text = "Unlucky"
+func apply_outcome(level_won: bool, has_next_level: bool = true, level_prev_completed: bool = false): 
+	var msg := ""
+	var enable_next := true
+	
+	if level_won: 
+		msg = "Congrats!"
+		enable_next = has_next_level
 	else: 
-		message_label.text = "Congrats!"
+		msg = "Unlucky"
+		enable_next = level_prev_completed
+	
+	message_label.text = msg
+	next_button.disabled = not enable_next

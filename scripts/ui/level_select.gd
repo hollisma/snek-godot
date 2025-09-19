@@ -22,10 +22,10 @@ func _populate_levels():
 		level_buttons.add_child(button)
 
 func _get_name_for_level(level_id) -> String: 
-	var name = LevelManager.levels[level_id]["name"]
+	var level_name = LevelManager.levels[level_id]["name"]
 	if ProgressManager.is_level_beaten(level_id): 
-		name = "✅ " + name
-	return name
+		level_name = "✅ " + level_name
+	return level_name
 
 func _on_level_selected(level_id: String): 
 	emit_signal("level_chosen", level_id)

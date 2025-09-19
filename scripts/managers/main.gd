@@ -64,7 +64,9 @@ func _do_level_end_screen(level_won: bool):
 	level_end_screen.level_select_pressed.connect(func(): _show_level_select())
 	level_end_screen.next_level_pressed.connect(func(): _start_next_level())
 	
-	level_end_screen.apply_outcome(level_won)
+	var has_next_level = LevelManager.get_next_level_id() != ""
+	var level_prev_completed = ProgressManager.is_level_beaten(LevelManager.current_level_id)
+	level_end_screen.apply_outcome(level_won, has_next_level, level_prev_completed)
 	game_state = GameState.LEVEL_END_SCREEN
 
 ##################
@@ -72,6 +74,10 @@ func _do_level_end_screen(level_won: bool):
 ##################
 
 func _on_level_chosen(level_id: String): 
+	if not LevelManager.levels.keys().has(level_id): 
+		push_error("No level with level_id: ", level_id)
+		return
+	
 	clear_node(ui_container)
 	_reset_gameplay_container()
 	_create_hud()
@@ -86,8 +92,8 @@ func _replay_level():
 	_on_level_chosen(LevelManager.current_level_id)
 
 func _start_next_level(): 
-	# TODO: Implement this
-	_on_level_chosen(LevelManager.current_level_id)
+	var next_level_id = LevelManager.get_next_level_id()
+	_on_level_chosen(next_level_id)
 
 func _on_main_menu_play(): 
 	_show_level_select()

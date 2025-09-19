@@ -7,7 +7,7 @@ func set_level(level_id: String):
 	if not levels.has(level_id): 
 		push_error("Level does not exist: ", level_id)
 		return
-	print("Setting level ", level_id)
+	print("Setting level: ", level_id)
 	current_level_id = level_id
 	data = levels[level_id]
 
@@ -22,12 +22,22 @@ func start_level(objective_manager: Node, powerup_manager: Node, food_manager: N
 	elif current_level_id == "": 
 		push_error("Error: no level set. Call set_level() or pass valid level_id")
 	
-	print("Starting level ", level_id)	
+	print("Starting level: ", level_id)	
 	MusicManager.play_song(load(data["music"]))
 	objective_manager.apply_level_data(data)
 	powerup_manager.apply_level_data(data)
 	powerup_manager.start_spawning()
 	food_manager.spawn_appl()
+
+func get_next_level_id(level_id: String = current_level_id) -> String: 
+	var index = level_order.find(level_id)
+	if index == -1 or index == level_order.size() - 1: 
+		return ""
+	return level_order[index + 1]
+
+var level_order = ["normal", "feeding_time", "escape", "easy_len", "easy_len_lose", "random_a", "random_b"]
+#var level_order = ["easy_len", "feeding_time"]
+#var level_order = ["normal", "feeding_time", "escape"]
 
 var levels = {
 	"normal": {
@@ -89,6 +99,7 @@ var levels = {
 	##################
 	### Dev levels ###
 	##################
+	
 	"easy_len": {
 		"name": "easy_len", 
 		"win_cons": [
@@ -110,7 +121,13 @@ var levels = {
 	},
 	"easy_len_lose": {
 		"name": "easy_len_lose", 
-		"win_cons": [],
+		"win_cons": [
+			{
+				"con_type": "score",
+				"comparator": "over",
+				"value": 1,
+			},
+		],
 		"lose_cons": [
 			{
 				"con_type": "length",
@@ -127,7 +144,7 @@ var levels = {
 			"visuals": 1,
 		}
 	},
-	"Random A": {
+	"random_a": {
 		"name": "Random A", 
 		"win_cons": [
 			{
@@ -146,7 +163,7 @@ var levels = {
 			"visuals": 1,
 		}
 	},
-	"Random B": {
+	"random_b": {
 		"name": "Random B", 
 		"win_cons": [],
 		"lose_cons": [
