@@ -23,16 +23,19 @@ func _ready():
 	powerup_manager.snek_head = snek_head
 	
 	MusicManager.start()
-	_show_level_select()
+	_show_main_menu()
 
 #############
 ### MENUS ###
 #############
 
-func _create_hud(): 
+func _show_main_menu(): 
 	clear_node(ui_container)
-	hud = preload(ResourcePaths.SCENES["hud"]).instantiate()
-	ui_container.add_child(hud)
+	var main_menu = preload(ResourcePaths.SCENES["main_menu"]).instantiate()
+	ui_container.add_child(main_menu)
+	main_menu.on_main_menu_play.connect(_on_main_menu_play)
+	main_menu.on_main_menu_quit.connect(_on_main_menu_quit)
+	game_state = GameState.MAIN_MENU
 
 func _show_level_select(): 
 	_reset_gameplay_container()
@@ -40,7 +43,13 @@ func _show_level_select():
 	var level_select = preload(ResourcePaths.SCENES["level_select"]).instantiate()
 	ui_container.add_child(level_select)
 	level_select.level_chosen.connect(_on_level_chosen)
+	level_select.level_select_back_pressed.connect(_show_main_menu)
 	game_state = GameState.LEVEL_SELECT
+
+func _create_hud(): 
+	clear_node(ui_container)
+	hud = preload(ResourcePaths.SCENES["hud"]).instantiate()
+	ui_container.add_child(hud)
 
 func _do_level_end_screen(level_won: bool): 
 	if game_state != GameState.IN_GAME: 
@@ -79,6 +88,12 @@ func _replay_level():
 func _start_next_level(): 
 	# TODO: Implement this
 	_on_level_chosen(LevelManager.current_level_id)
+
+func _on_main_menu_play(): 
+	_show_level_select()
+
+func _on_main_menu_quit(): 
+	get_tree().quit()
 
 ########################
 ### GAMEPLAY SIGNALS ###

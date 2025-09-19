@@ -4,8 +4,10 @@ extends Control
 @onready var back_button = $VBoxContainer/BottomContainer/BackButton
 
 signal level_chosen(level_id: String)
+signal level_select_back_pressed
 
 func _ready():
+	back_button.pressed.connect(_on_back_pressed)
 	_populate_levels()
 
 func _populate_levels(): 
@@ -21,3 +23,6 @@ func _populate_levels():
 
 func _on_level_selected(level_id: String): 
 	emit_signal("level_chosen", level_id)
+
+func _on_back_pressed(): 
+	level_select_back_pressed.emit()

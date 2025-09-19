@@ -5,8 +5,9 @@ const SCENES = {
 	"appl": "res://scenes/collectibles/appl.tscn",
 	"appl_green": "res://scenes/collectibles/appl_green.tscn",
 	"appl_golden": "res://scenes/collectibles/appl_golden.tscn",
-	"hud": "res://scenes/menus/hud.tscn",
+	"main_menu": "res://scenes/menus/main_menu.tscn",
 	"level_select": "res://scenes/menus/level_select.tscn",
+	"hud": "res://scenes/menus/hud.tscn",
 	"level_end_screen": "res://scenes/menus/level_end_screen.tscn",
 }
 
