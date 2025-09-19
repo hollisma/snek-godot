@@ -22,6 +22,7 @@ MusicManager="*res://scenes/managers/music_manager.tscn"
 LevelManager="*res://scripts/managers/level_manager.gd"
 ResourcePaths="*res://scripts/utils/resource_paths.gd"
 GameEnums="*res://scripts/utils/game_enums.gd"
+ProgressManager="*res://scripts/managers/progress_manager.gd"
 
 [global_group]
 

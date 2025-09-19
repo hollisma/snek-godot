@@ -16,10 +16,16 @@ func _populate_levels():
 	
 	for level_id in LevelManager.levels.keys(): 
 		var button = Button.new()
-		button.text = LevelManager.levels[level_id]["name"]
+		button.text = _get_name_for_level(level_id)
 		button.custom_minimum_size = Vector2(225, 90)
 		button.pressed.connect(_on_level_selected.bind(level_id))
 		level_buttons.add_child(button)
+
+func _get_name_for_level(level_id) -> String: 
+	var name = LevelManager.levels[level_id]["name"]
+	if ProgressManager.is_level_beaten(level_id): 
+		name = "✅ " + name
+	return name
 
 func _on_level_selected(level_id: String): 
 	emit_signal("level_chosen", level_id)

@@ -102,6 +102,7 @@ func _on_main_menu_quit():
 func _on_objectives_completed(outcome): 
 	if outcome == GameEnums.Outcome.WIN: 
 		_do_level_end_screen(true)
+		ProgressManager.mark_level_beaten(LevelManager.current_level_id)
 	elif outcome == GameEnums.Outcome.LOSE: 
 		_do_level_end_screen(false)
 
