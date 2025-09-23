@@ -56,7 +56,7 @@ var levels = {
 			"slow": 4,
 			"music": 1,
 			"visuals": 1,
-		}
+		},
 	},
 	"feeding_time": {
 		"name": "Feeding Time", 
@@ -74,7 +74,8 @@ var levels = {
 			"slow": 2,
 			"scissors": 3,
 			"fatten": 5,
-		}
+		},
+		"powerup_spawn_timing": { "min": 2, "max": 5 },
 	},
 	"escape": {
 		"name": "Escape", 
@@ -92,7 +93,8 @@ var levels = {
 			"slow": 3,
 			"scissors": 2,
 			"fatten": 1,
-		}
+		},
+		"powerup_spawn_timing": { "min": 1, "max": 1 },
 	},
 	
 	##################
@@ -116,7 +118,7 @@ var levels = {
 			"scissors": 2,
 			"music": 1,
 			"visuals": 1,
-		}
+		},
 	},
 	"easy_len_lose": {
 		"name": "easy_len_lose", 
@@ -141,7 +143,7 @@ var levels = {
 			"scissors": 2,
 			"music": 1,
 			"visuals": 1,
-		}
+		},
 	},
 	"all_powerups": {
 		"name": "All Powerups", 
@@ -161,7 +163,7 @@ var levels = {
 			"fatten": 1,
 			"music": 1,
 			"visuals": 1,
-		}
+		},
 	},
 	"random_b": {
 		"name": "Random B", 
@@ -180,6 +182,6 @@ var levels = {
 			"scissors": 2,
 			"music": 1,
 			"visuals": 1,
-		}
+		},
 	},
 }

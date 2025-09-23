@@ -33,11 +33,20 @@ func apply_level_data(level_data):
 	total_freq = 0
 	powerup_freq_table.clear()
 	
+	# Apply frequencies
 	for scene in powerup_scenes: 
 		var key_name = _get_powerup_key(scene)
 		var freq = freqs.get(key_name, 0) # default 0 if powerup not in data
 		total_freq += freq
 		powerup_freq_table.append({ "scene": scene, "cumulative": total_freq })
+	
+	# Apply spawner timings
+	if level_data.has("powerup_spawn_timing"): 
+		var spawn_cfg = level_data["powerup_spawn"]
+		if spawn_cfg.has("min"): 
+			spawn_time_min = int(spawn_cfg["min"]) 
+		if spawn_cfg.has("max"): 
+			spawn_time_max = int(spawn_cfg["max"])
 
 func start_spawning(): 
 	_restart_timer()
