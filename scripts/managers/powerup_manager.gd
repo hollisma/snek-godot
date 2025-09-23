@@ -5,7 +5,7 @@ extends Node2D
 var spawn_time_min = 3 # 3
 var spawn_time_max = 7 # 7
 
-@onready var powerup_timer = $PowerupTimer
+@onready var powerup_spawner = $PowerupSpawner
 var snek: Node
 var snek_head: Node
 
@@ -43,7 +43,7 @@ func start_spawning():
 	_restart_timer()
 
 func stop(): 
-	powerup_timer.stop()
+	powerup_spawner.stop()
 
 func spawn_powerup(): 
 	if powerup_scenes.size() == 0: 
@@ -55,13 +55,13 @@ func spawn_powerup():
 	call_deferred("add_child", powerup)
 	powerup.collected.connect(_on_powerup_collected)
 
-func _on_powerup_timer_timeout():
+func _on_powerup_spawner_timeout():
 	spawn_powerup()
 	_restart_timer()
 
 func _restart_timer():
 	var spawn_time = randi_range(spawn_time_min, spawn_time_max)
-	powerup_timer.start(spawn_time)
+	powerup_spawner.start(spawn_time)
 
 func _get_powerup_key(scene: PackedScene) -> String: 
 	var filename = scene.resource_path.get_file()

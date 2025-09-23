@@ -31,7 +31,7 @@ one_shot = true
 script = ExtResource("4_aba6i")
 powerup_scenes = Array[PackedScene]([ExtResource("5_g2fy6"), ExtResource("6_qj640"), ExtResource("7_yi38y"), ExtResource("8_nnfb3"), ExtResource("9_dwgmp"), ExtResource("10_hg7sd")])
 
-[node name="PowerupTimer" type="Timer" parent="GameplayContainer/PowerupManager"]
+[node name="PowerupSpawner" type="Timer" parent="GameplayContainer/PowerupManager"]
 
 [node name="ThemeManager" type="Node" parent="GameplayContainer"]
 script = ExtResource("10_s6uy5")
@@ -50,5 +50,5 @@ offset_bottom = 40.0
 [connection signal="snek_death" from="GameplayContainer/Snek" to="." method="_on_snek_death"]
 [connection signal="speed_changed" from="GameplayContainer/Snek" to="." method="_on_snek_speed_changed"]
 [connection signal="timeout" from="GameplayContainer/FoodManager/GoldenApplTimer" to="GameplayContainer/FoodManager" method="_on_GoldenApplTimer_timeout"]
-[connection signal="timeout" from="GameplayContainer/PowerupManager/PowerupTimer" to="GameplayContainer/PowerupManager" method="_on_powerup_timer_timeout"]
+[connection signal="timeout" from="GameplayContainer/PowerupManager/PowerupSpawner" to="GameplayContainer/PowerupManager" method="_on_powerup_spawner_timeout"]
 [connection signal="objectives_completed" from="GameplayContainer/ObjectiveManager" to="." method="_on_objectives_completed"]
