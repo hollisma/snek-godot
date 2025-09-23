@@ -35,18 +35,64 @@ func get_next_level_id(level_id: String = current_level_id) -> String:
 		return ""
 	return level_order[index + 1]
 
-var level_order = ["normal", "feeding_time", "escape", "easy_len", "easy_len_lose", "all_powerups", "random_b"]
+var level_order = ["easy_score", "medium_score", "hard_score", "normal", "feeding_time", "escape", "easy_len", "easy_len_lose", "all_powerups", "random_b"]
 #var level_order = ["easy_len", "feeding_time"]
 #var level_order = ["normal", "feeding_time", "escape"]
 
+### List of Attributes
+	#"name": "All Powerups", 
+	#"win_cons": [
+		#{
+			#"con_type": "length",
+			#"comparator": "over",
+			#"value": 10,
+		#},
+	#],
+	#"lose_cons": [
+		#{
+			#"con_type": "speed",
+			#"comparator": "over",
+			#"value": 10,
+		#},
+	#],
+	#"music": ResourcePaths.MUSIC["feeding_time"], 
+	#"powerups": {
+		#"speed": 1,
+		#"slow": 1,
+		#"scissors": 1,
+		#"fatten": 1,
+		#"music": 1,
+		#"visuals": 1,
+	#},
+	#"powerup_spawn": { "min": 2, "max": 5 },
+	#"powerup_fade": { "delay": 10, "duration": 5 }
+
 var levels = {
-	"normal": {
-		"name": "Normal",
+	"easy_score": {
+		"name": "Easy Score",
 		"win_cons": [
 			{
 				"con_type": "score",
 				"comparator": "over",
-				"value": 50, # 50
+				"value": 10,
+			},
+		],
+		"lose_cons": [],
+		"music": ResourcePaths.MUSIC["default"], 
+		"powerups": {
+			"speed": 1,
+			"slow": 1,
+		},
+		"powerup_spawn": { "min": 5, "max": 7 },
+		"powerup_fade": { "delay": 15, "duration": 5 }
+	},
+	"medium_score": {
+		"name": "Medium Score",
+		"win_cons": [
+			{
+				"con_type": "score",
+				"comparator": "over",
+				"value": 25,
 			},
 		],
 		"lose_cons": [],
@@ -57,6 +103,27 @@ var levels = {
 			"music": 1,
 			"visuals": 1,
 		},
+		"powerup_spawn": { "min": 3, "max": 5 },
+	},
+	"hard_score": {
+		"name": "Hard Score",
+		"win_cons": [
+			{
+				"con_type": "score",
+				"comparator": "over",
+				"value": 50,
+			},
+		],
+		"lose_cons": [],
+		"music": ResourcePaths.MUSIC["default"], 
+		"powerups": {
+			"speed": 3,
+			"slow": 3,
+			"scissors": 1,
+			"fatten": 3,
+		},
+		"powerup_spawn": { "min": 1, "max": 3 },
+		"powerup_fade": { "delay": 7, "duration": 5 }
 	},
 	"feeding_time": {
 		"name": "Feeding Time", 
@@ -75,7 +142,8 @@ var levels = {
 			"scissors": 3,
 			"fatten": 5,
 		},
-		"powerup_spawn_timing": { "min": 2, "max": 5 },
+		"powerup_spawn": { "min": 1, "max": 3 },
+		"powerup_fade": { "delay": 15, "duration": 5}
 	},
 	"escape": {
 		"name": "Escape", 
@@ -94,7 +162,8 @@ var levels = {
 			"scissors": 2,
 			"fatten": 1,
 		},
-		"powerup_spawn_timing": { "min": 1, "max": 1 },
+		"powerup_spawn": { "min": 1, "max": 1 },
+		"powerup_fade": { "delay": 7, "duration": 3}
 	},
 	
 	##################
@@ -164,6 +233,8 @@ var levels = {
 			"music": 1,
 			"visuals": 1,
 		},
+		"powerup_spawn": { "min": 1, "max": 1 },
+		"powerup_fade": { "delay": 2, "duration": 1}
 	},
 	"random_b": {
 		"name": "Random B", 

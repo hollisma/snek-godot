@@ -56,6 +56,12 @@ func _do_level_end_screen(level_won: bool):
 		return
 	
 	clear_node(ui_container)
+	_create_level_end_screen(level_won)
+	game_state = GameState.LEVEL_END_SCREEN
+	
+	powerup_manager.stop()
+
+func _create_level_end_screen(level_won: bool): 
 	var level_end_screen = preload(ResourcePaths.SCENES["level_end_screen"]).instantiate()
 	ui_container.add_child(level_end_screen)
 	
@@ -67,7 +73,6 @@ func _do_level_end_screen(level_won: bool):
 	var has_next_level = LevelManager.get_next_level_id() != ""
 	var level_prev_completed = ProgressManager.is_level_beaten(LevelManager.current_level_id)
 	level_end_screen.apply_outcome(level_won, has_next_level, level_prev_completed)
-	game_state = GameState.LEVEL_END_SCREEN
 
 ##################
 ### MENU LOGIC ###
@@ -120,7 +125,6 @@ func _on_appl_eaten(appl):
 
 func _on_snek_death(): 
 	snek.stop()
-	powerup_manager.stop()
 	_do_level_end_screen(false)
 
 func _on_snek_length_changed(length):

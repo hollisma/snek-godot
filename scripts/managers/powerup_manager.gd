@@ -2,8 +2,8 @@ extends Node2D
 
 @export var powerup_scenes: Array[PackedScene]
 
-var spawn_time_min = 3 # 3
-var spawn_time_max = 7 # 7
+var spawn_time_min = GameConsts.POWERUP_SPAWN_TIME_MIN_SECONDS
+var spawn_time_max = GameConsts.POWERUP_SPAWN_TIME_MAX_SECONDS
 
 @onready var powerup_spawner = $PowerupSpawner
 var snek: Node
@@ -11,6 +11,10 @@ var snek_head: Node
 
 var powerup_freq_table: Array = []
 var total_freq: int = 0
+
+# Optional per-level overrides for powerup fade
+var fade_delay_override: float = -1.0
+var fade_duration_override: float = -1.0
 
 func _ready(): 
 	_apply_default_frequencies()
@@ -41,12 +45,22 @@ func apply_level_data(level_data):
 		powerup_freq_table.append({ "scene": scene, "cumulative": total_freq })
 	
 	# Apply spawner timings
-	if level_data.has("powerup_spawn_timing"): 
+	if level_data.has("powerup_spawn"): 
 		var spawn_cfg = level_data["powerup_spawn"]
 		if spawn_cfg.has("min"): 
 			spawn_time_min = int(spawn_cfg["min"]) 
 		if spawn_cfg.has("max"): 
 			spawn_time_max = int(spawn_cfg["max"])
+	
+	# Apply powerup fade overrides
+	fade_delay_override = -1.0
+	fade_duration_override = -1.0
+	if level_data.has("powerup_fade"): 
+		var fade_cfg = level_data["powerup_fade"]
+		if fade_cfg.has("delay"): 
+			fade_delay_override = float(fade_cfg["delay"]) 
+		if fade_cfg.has("duration"): 
+			fade_duration_override = float(fade_cfg["duration"]) 
 
 func start_spawning(): 
 	_restart_timer()
@@ -61,6 +75,11 @@ func spawn_powerup():
 	var scene = _pick_powerup()
 	var powerup = scene.instantiate()
 	powerup.global_position = _get_spawn_location()
+	# Apply fade overrides before _ready() runs
+	if fade_delay_override >= 0.0: 
+		powerup.fade_delay_seconds = fade_delay_override
+	if fade_duration_override >= 0.0: 
+		powerup.fade_duration_seconds = fade_duration_override
 	call_deferred("add_child", powerup)
 	powerup.collected.connect(_on_powerup_collected)
 
