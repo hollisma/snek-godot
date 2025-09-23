@@ -35,7 +35,7 @@ func get_next_level_id(level_id: String = current_level_id) -> String:
 		return ""
 	return level_order[index + 1]
 
-var level_order = ["normal", "feeding_time", "escape", "easy_len", "easy_len_lose", "random_a", "random_b"]
+var level_order = ["normal", "feeding_time", "escape", "easy_len", "easy_len_lose", "all_powerups", "random_b"]
 #var level_order = ["easy_len", "feeding_time"]
 #var level_order = ["normal", "feeding_time", "escape"]
 
@@ -54,7 +54,6 @@ var levels = {
 		"powerups": {
 			"speed": 4,
 			"slow": 4,
-			"scissors": 2,
 			"music": 1,
 			"visuals": 1,
 		}
@@ -74,7 +73,7 @@ var levels = {
 			"speed": 2,
 			"slow": 2,
 			"scissors": 3,
-			"visuals": 5, # "fatten": 5,
+			"fatten": 5,
 		}
 	},
 	"escape": {
@@ -92,7 +91,7 @@ var levels = {
 			"speed": 4,
 			"slow": 3,
 			"scissors": 2,
-			"visuals": 1, # "fatten": 1,
+			"fatten": 1,
 		}
 	},
 	
@@ -144,8 +143,8 @@ var levels = {
 			"visuals": 1,
 		}
 	},
-	"random_a": {
-		"name": "Random A", 
+	"all_powerups": {
+		"name": "All Powerups", 
 		"win_cons": [
 			{
 				"con_type": "length",
@@ -156,9 +155,10 @@ var levels = {
 		"lose_cons": [],
 		"music": ResourcePaths.MUSIC["feeding_time"], 
 		"powerups": {
-			"speed": 4,
-			"slow": 4,
-			"scissors": 2,
+			"speed": 1,
+			"slow": 1,
+			"scissors": 1,
+			"fatten": 1,
 			"music": 1,
 			"visuals": 1,
 		}

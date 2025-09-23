@@ -69,6 +69,14 @@ func trim_body(segment_num_input):
 		var last_segment = segments.pop_back()
 		if last_segment: 
 			last_segment.queue_free()
+	emit_signal("length_changed", segments.size())
+
+func grow_body(segment_num): 
+	for i in range(segment_num): 
+		var new_segment = body_scene.instantiate()
+		$BodySegments.call_deferred("add_child", new_segment)
+		segments.append(new_segment)
+	emit_signal("length_changed", segments.size())
 
 # Used internally and for dev tools
 func grow(): 

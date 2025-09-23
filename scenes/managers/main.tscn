@@ -1,14 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://dhhpwwmoo8bwq"]
+[gd_scene load_steps=13 format=3 uid="uid://dhhpwwmoo8bwq"]
 
 [ext_resource type="Script" uid="uid://cmwb0xomnmipv" path="res://scripts/managers/main.gd" id="1_ikj0o"]
 [ext_resource type="PackedScene" uid="uid://ulutd5rqohpg" path="res://scenes/snek/snek.tscn" id="2_7s71p"]
 [ext_resource type="Script" uid="uid://gxagw548l4ud" path="res://scripts/managers/food_manager.gd" id="3_hg7sd"]
-[ext_resource type="Script" uid="uid://brxig4gnqxov1" path="res://scripts/gameplay/powerup_manager.gd" id="4_aba6i"]
+[ext_resource type="Script" uid="uid://brxig4gnqxov1" path="res://scripts/managers/powerup_manager.gd" id="4_aba6i"]
 [ext_resource type="PackedScene" uid="uid://fbvdjq64klcd" path="res://scenes/collectibles/speed_power.tscn" id="5_g2fy6"]
 [ext_resource type="PackedScene" uid="uid://c7gesy6mgxwbv" path="res://scenes/collectibles/slow_power.tscn" id="6_qj640"]
 [ext_resource type="PackedScene" uid="uid://br5ehq457aahs" path="res://scenes/collectibles/music_power.tscn" id="7_yi38y"]
 [ext_resource type="PackedScene" uid="uid://bry6emtqt1k87" path="res://scenes/collectibles/visuals_power.tscn" id="8_nnfb3"]
 [ext_resource type="PackedScene" uid="uid://8aesp52ka4qr" path="res://scenes/collectibles/scissors_power.tscn" id="9_dwgmp"]
+[ext_resource type="PackedScene" uid="uid://dpyk180kawt87" path="res://scenes/collectibles/fatten_power.tscn" id="10_hg7sd"]
 [ext_resource type="Script" uid="uid://d2nt2neteuy7u" path="res://scripts/managers/theme_manager.gd" id="10_s6uy5"]
 [ext_resource type="Script" uid="uid://cf6ex1ewcbcid" path="res://scripts/managers/objective_manager.gd" id="11_7s71p"]
 
@@ -28,7 +29,7 @@ one_shot = true
 
 [node name="PowerupManager" type="Node2D" parent="GameplayContainer"]
 script = ExtResource("4_aba6i")
-powerup_scenes = Array[PackedScene]([ExtResource("5_g2fy6"), ExtResource("6_qj640"), ExtResource("7_yi38y"), ExtResource("8_nnfb3"), ExtResource("9_dwgmp")])
+powerup_scenes = Array[PackedScene]([ExtResource("5_g2fy6"), ExtResource("6_qj640"), ExtResource("7_yi38y"), ExtResource("8_nnfb3"), ExtResource("9_dwgmp"), ExtResource("10_hg7sd")])
 
 [node name="PowerupTimer" type="Timer" parent="GameplayContainer/PowerupManager"]
 

@@ -1,0 +1,14 @@
+[gd_scene load_steps=5 format=3 uid="uid://dpyk180kawt87"]
+
+[ext_resource type="PackedScene" uid="uid://b85t84uvic217" path="res://scenes/collectibles/powerup.tscn" id="1_ylgii"]
+[ext_resource type="Script" uid="uid://wfc78sj7vhgd" path="res://scripts/gameplay/fatten_power.gd" id="2_437do"]
+[ext_resource type="Script" uid="uid://d3x5y4gk1ixqq" path="res://scripts/utils/themed_sprite.gd" id="3_khxi5"]
+[ext_resource type="Texture2D" uid="uid://bmn75gpe3k254" path="res://art/collectibles/cake.png" id="4_r5wea"]
+
+[node name="FattenPower" instance=ExtResource("1_ylgii")]
+script = ExtResource("2_437do")
+
+[node name="Sprite2D" parent="." index="0"]
+script = ExtResource("3_khxi5")
+basic_texture = ExtResource("4_r5wea")
+shaded_texture = ExtResource("4_r5wea")
