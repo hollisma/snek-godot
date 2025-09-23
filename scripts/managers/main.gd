@@ -147,7 +147,10 @@ func _update_score(new_score: int):
 	score = new_score
 	objective_manager.update_condition(GameEnums.ConditionType.SCORE, score)
 
-# DEV buttons
+#################
+### DEV STUFF ###
+#################
+
 func _process(_delta):
 	if Input.is_action_just_pressed("dev 1"):
 		MusicManager.play_random_song()
@@ -156,4 +159,4 @@ func _process(_delta):
 	if Input.is_action_just_pressed("dev 3"):
 		snek.grow()
 	if Input.is_action_just_pressed("dev 4"):
-		pass
+		objective_manager.__DEV_win()

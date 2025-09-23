@@ -149,7 +149,7 @@ var levels = {
 			{
 				"con_type": "length",
 				"comparator": "over",
-				"value": 3,
+				"value": 10,
 			},
 		],
 		"lose_cons": [],
@@ -170,7 +170,7 @@ var levels = {
 			{
 				"con_type": "length",
 				"comparator": "over",
-				"value": 3,
+				"value": 10,
 			},
 		],
 		"music": ResourcePaths.MUSIC["feeding_time"], 

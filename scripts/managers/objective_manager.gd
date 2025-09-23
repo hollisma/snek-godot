@@ -84,6 +84,14 @@ func _value_meets(con, value) -> bool:
 	
 	return false
 
+#################
+### DEV STUFF ###
+#################
+
+func __DEV_win(): 
+	objectives_completed.emit(Outcome.WIN)
+	outcome_emitted = true
+
 #######################
 ### DATA CONVERTERS ###
 #######################
