@@ -16,21 +16,9 @@ var total_freq: int = 0
 var fade_delay_override: float = -1.0
 var fade_duration_override: float = -1.0
 
-func _ready(): 
-	_apply_default_frequencies()
-
-func _apply_default_frequencies(): 
-	total_freq = 0
-	powerup_freq_table.clear()
-	for scene in powerup_scenes: 
-		var temp = scene.instantiate()
-		var freq = temp.FREQUENCY if "FREQUENCY" in temp else 1
-		temp.queue_free()
-		total_freq += freq
-		powerup_freq_table.append({ "scene": scene, "cumulative": total_freq })
-
 func apply_level_data(level_data): 
 	if not level_data.has("powerups"): 
+		_apply_default_frequencies()
 		return
 	
 	var freqs = level_data["powerups"]
@@ -69,7 +57,7 @@ func stop():
 	powerup_spawner.stop()
 
 func spawn_powerup(): 
-	if powerup_scenes.size() == 0: 
+	if total_freq == 0: # Level set to not spawn powerups
 		return
 	
 	var scene = _pick_powerup()
@@ -79,6 +67,16 @@ func spawn_powerup():
 	
 	call_deferred("add_child", powerup)
 	powerup.collected.connect(_on_powerup_collected)
+
+func _apply_default_frequencies(): 
+	total_freq = 0
+	powerup_freq_table.clear()
+	for scene in powerup_scenes: 
+		var temp = scene.instantiate()
+		var freq = temp.FREQUENCY if "FREQUENCY" in temp else 1
+		temp.queue_free()
+		total_freq += freq
+		powerup_freq_table.append({ "scene": scene, "cumulative": total_freq })
 
 func _on_powerup_spawner_timeout():
 	spawn_powerup()

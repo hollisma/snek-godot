@@ -52,6 +52,9 @@ func _get_food_key(scene: PackedScene) -> String:
 	return basename
 
 func spawn_appl(): 
+	if total_food_freq == 0: # Level set to not spawn food
+		return
+	
 	var margin = 16
 	var max_attempts = 100 # to avoid infinite loop
 	var pos = Vector2.ZERO

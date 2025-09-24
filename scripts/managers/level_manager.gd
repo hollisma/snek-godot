@@ -71,7 +71,7 @@ var level_order = ["easy_score", "medium_score", "hard_score", "normal", "feedin
 			#"appl": 80,
 			#"appl green": 15,
 			#"appl golden": 5,
-		#}
+		#},
 
 var levels = {
 	"easy_score": {
@@ -85,15 +85,10 @@ var levels = {
 		],
 		"lose_cons": [],
 		"music": ResourcePaths.MUSIC["default"], 
-		"powerups": {
-			"speed": 1,
-			"slow": 1,
-		},
+		"powerups": {},
 		"powerup_spawn": { "min": 5, "max": 7 },
 		"powerup_fade": { "delay": 15, "duration": 5 },
-		"foods": {
-			"appl": 1,
-		}
+		"foods": { "appl": 1 },
 	},
 	"medium_score": {
 		"name": "Medium Score",
@@ -108,11 +103,13 @@ var levels = {
 		"music": ResourcePaths.MUSIC["default"], 
 		"powerups": {
 			"speed": 4,
-			"slow": 4,
-			"music": 1,
-			"visuals": 1,
+			"slow": 2,
 		},
 		"powerup_spawn": { "min": 3, "max": 5 },
+		"foods": {
+			"appl": 5,
+			"appl green": 1,
+		},
 	},
 	"hard_score": {
 		"name": "Hard Score",
@@ -151,8 +148,13 @@ var levels = {
 			"scissors": 3,
 			"fatten": 5,
 		},
-		"powerup_spawn": { "min": 1, "max": 3 },
+		"powerup_spawn": { "min": 1, "max": 2 },
 		"powerup_fade": { "delay": 15, "duration": 5},
+		"foods": {
+			"appl": 5,
+			"appl green": 2,
+			"appl golden": 1,
+		},
 	},
 	"escape": {
 		"name": "Escape", 
@@ -160,7 +162,7 @@ var levels = {
 			{
 				"con_type": "speed",
 				"comparator": "over",
-				"value": 15, # 15
+				"value": 20,
 			},
 		],
 		"lose_cons": [],
@@ -168,11 +170,12 @@ var levels = {
 		"powerups": {
 			"speed": 4,
 			"slow": 3,
-			"scissors": 2,
+			"scissors": 1,
 			"fatten": 1,
 		},
 		"powerup_spawn": { "min": 1, "max": 1 },
 		"powerup_fade": { "delay": 7, "duration": 3},
+		"food": { "appl": 1 },
 	},
 	
 	##################
