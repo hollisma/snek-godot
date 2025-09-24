@@ -40,7 +40,7 @@ func apply_level_data(level_data):
 	# Apply frequencies
 	for scene in powerup_scenes: 
 		var key_name = _get_powerup_key(scene)
-		var freq = freqs.get(key_name, 0) # default 0 if powerup not in data
+		var freq = int(freqs.get(key_name, 0)) # default 0 if powerup not in data
 		total_freq += freq
 		powerup_freq_table.append({ "scene": scene, "cumulative": total_freq })
 	
@@ -75,11 +75,8 @@ func spawn_powerup():
 	var scene = _pick_powerup()
 	var powerup = scene.instantiate()
 	powerup.global_position = _get_spawn_location()
-	# Apply fade overrides before _ready() runs
-	if fade_delay_override >= 0.0: 
-		powerup.fade_delay_seconds = fade_delay_override
-	if fade_duration_override >= 0.0: 
-		powerup.fade_duration_seconds = fade_duration_override
+	_apply_fade_to_powerup(powerup)
+	
 	call_deferred("add_child", powerup)
 	powerup.collected.connect(_on_powerup_collected)
 
@@ -116,6 +113,12 @@ func _get_spawn_location():
 		if snek_head.position.distance_to(pos) > margin * 2: 
 			break
 	return pos
+
+func _apply_fade_to_powerup(powerup): 
+	if fade_delay_override >= 0.0: 
+		powerup.fade_delay_seconds = fade_delay_override
+	if fade_duration_override >= 0.0: 
+		powerup.fade_duration_seconds = fade_duration_override
 
 func _on_powerup_collected(powerup): 
 	if powerup.has_method("apply_effect"): 

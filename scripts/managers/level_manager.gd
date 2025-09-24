@@ -27,6 +27,7 @@ func start_level(objective_manager: Node, powerup_manager: Node, food_manager: N
 	objective_manager.apply_level_data(data)
 	powerup_manager.apply_level_data(data)
 	powerup_manager.start_spawning()
+	food_manager.apply_level_data(data)
 	food_manager.spawn_appl()
 
 func get_next_level_id(level_id: String = current_level_id) -> String: 
@@ -40,32 +41,37 @@ var level_order = ["easy_score", "medium_score", "hard_score", "normal", "feedin
 #var level_order = ["normal", "feeding_time", "escape"]
 
 ### List of Attributes
-	#"name": "All Powerups", 
-	#"win_cons": [
-		#{
-			#"con_type": "length",
-			#"comparator": "over",
-			#"value": 10,
+		#"name": "All Powerups", 
+		#"win_cons": [
+			#{
+				#"con_type": "length",
+				#"comparator": "over",
+				#"value": 10,
+			#},
+		#],
+		#"lose_cons": [
+			#{
+				#"con_type": "speed",
+				#"comparator": "over",
+				#"value": 10,
+			#},
+		#],
+		#"music": ResourcePaths.MUSIC["feeding_time"], 
+		#"powerups": {
+			#"speed": 1,
+			#"slow": 1,
+			#"scissors": 1,
+			#"fatten": 1,
+			#"music": 1,
+			#"visuals": 1,
 		#},
-	#],
-	#"lose_cons": [
-		#{
-			#"con_type": "speed",
-			#"comparator": "over",
-			#"value": 10,
-		#},
-	#],
-	#"music": ResourcePaths.MUSIC["feeding_time"], 
-	#"powerups": {
-		#"speed": 1,
-		#"slow": 1,
-		#"scissors": 1,
-		#"fatten": 1,
-		#"music": 1,
-		#"visuals": 1,
-	#},
-	#"powerup_spawn": { "min": 2, "max": 5 },
-	#"powerup_fade": { "delay": 10, "duration": 5 }
+		#"powerup_spawn": { "min": 2, "max": 5 },
+		#"powerup_fade": { "delay": 10, "duration": 5 },
+		#"foods": {
+			#"appl": 80,
+			#"appl green": 15,
+			#"appl golden": 5,
+		#}
 
 var levels = {
 	"easy_score": {
@@ -84,7 +90,10 @@ var levels = {
 			"slow": 1,
 		},
 		"powerup_spawn": { "min": 5, "max": 7 },
-		"powerup_fade": { "delay": 15, "duration": 5 }
+		"powerup_fade": { "delay": 15, "duration": 5 },
+		"foods": {
+			"appl": 1,
+		}
 	},
 	"medium_score": {
 		"name": "Medium Score",
@@ -123,7 +132,7 @@ var levels = {
 			"fatten": 3,
 		},
 		"powerup_spawn": { "min": 1, "max": 3 },
-		"powerup_fade": { "delay": 7, "duration": 5 }
+		"powerup_fade": { "delay": 7, "duration": 5 },
 	},
 	"feeding_time": {
 		"name": "Feeding Time", 
@@ -143,7 +152,7 @@ var levels = {
 			"fatten": 5,
 		},
 		"powerup_spawn": { "min": 1, "max": 3 },
-		"powerup_fade": { "delay": 15, "duration": 5}
+		"powerup_fade": { "delay": 15, "duration": 5},
 	},
 	"escape": {
 		"name": "Escape", 
@@ -163,7 +172,7 @@ var levels = {
 			"fatten": 1,
 		},
 		"powerup_spawn": { "min": 1, "max": 1 },
-		"powerup_fade": { "delay": 7, "duration": 3}
+		"powerup_fade": { "delay": 7, "duration": 3},
 	},
 	
 	##################
@@ -234,7 +243,7 @@ var levels = {
 			"visuals": 1,
 		},
 		"powerup_spawn": { "min": 1, "max": 1 },
-		"powerup_fade": { "delay": 2, "duration": 1}
+		"powerup_fade": { "delay": 2, "duration": 1},
 	},
 	"random_b": {
 		"name": "Random B", 
