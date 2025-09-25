@@ -137,7 +137,7 @@ var levels = {
 			{
 				"con_type": "length",
 				"comparator": "over",
-				"value": 25, # 25
+				"value": 35,
 			},
 		],
 		"lose_cons": [],
@@ -146,7 +146,7 @@ var levels = {
 			"speed": 2,
 			"slow": 2,
 			"scissors": 3,
-			"fatten": 5,
+			"fatten": 6,
 		},
 		"powerup_spawn": { "min": 1, "max": 2 },
 		"powerup_fade": { "delay": 15, "duration": 5},

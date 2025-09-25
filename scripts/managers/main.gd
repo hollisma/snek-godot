@@ -164,3 +164,15 @@ func _process(_delta):
 		snek.grow()
 	if Input.is_action_just_pressed("dev 4"):
 		objective_manager.__DEV_win()
+	if Input.is_action_just_pressed("dev 5"):
+		ProgressManager.reset_progress()
+	if Input.is_action_just_pressed("dev 6"):
+		pass
+	if Input.is_action_just_pressed("dev 7"):
+		pass
+	if Input.is_action_just_pressed("dev 8"):
+		pass
+	if Input.is_action_just_pressed("dev 9"):
+		pass
+	if Input.is_action_just_pressed("dev 0"):
+		pass
